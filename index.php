@@ -35,7 +35,7 @@
         <div class="list-group list-group-flush mx-3 mt-4">
             <a
             href="#"
-            class="list-group-item list-group-item-action py-2 ripple active"
+            class="list-group-item list-group-item-action py-2 ripple"
             aria-current="true"
             >
             <i class="fas fa-tachometer-alt fa-fw me-3"></i
@@ -132,7 +132,8 @@
                     height="40"
                     alt=""
                     loading="lazy"
-                    />
+                />
+                <div class="name p-1">Rachid Daoudi</div>
             </a>
             <ul
                 class="dropdown-menu dropdown-menu-end"
@@ -156,7 +157,7 @@
         <div class="container pt-4">
 
              <!--Section: Minimal statistics cards-->
-                <section>
+                <!-- <section>
                 <div class="row">
                     <div class="col-xl-3 col-sm-6 col-12 mb-4">
                     <div class="card">
@@ -219,118 +220,98 @@
                     </div>
                     </div>
                 </div>
-                </section>
+                </section> -->
                 <!--Section: Minimal statistics cards-->
             <table class="table align-middle mb-0 bg-white">
-            <thead class="bg-light">
-                <tr>
-                <th>Name</th>
-                <th>Title</th>
-                <th>Status</th>
-                <th>Position</th>
-                <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                <td>
-                    <div class="d-flex align-items-center">
-                    <img
-                        src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-                        alt=""
-                        style="width: 45px; height: 45px"
-                        class="rounded-circle"
+                <thead class="bg-light">
+                    <tr>
+                    <th scope="col">image</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Quantite</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <td>
+                        <div class="d-flex align-items-center">
+                        <img
+                            src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                            alt=""
+                            style="width: 45px; height: 45px"
+                            class="rounded-circle"
                         />
-                    <div class="ms-3">
-                        <p class="fw-bold mb-1">John Doe</p>
-                        <p class="text-muted mb-0">john.doe@gmail.com</p>
-                    </div>
-                    </div>
-                </td>
-                <td>
-                    <p class="fw-normal mb-1">Software engineer</p>
-                    <p class="text-muted mb-0">IT department</p>
-                </td>
-                <td>
-                    <span class="badge badge-success rounded-pill d-inline">Active</span>
-                </td>
-                <td>Senior</td>
-                <td>
-                    <button type="button" class="btn btn-link btn-sm btn-rounded">
-                    Edit
-                    </button>
-                </td>
-                </tr>
-                <tr>
-                <td>
-                    <div class="d-flex align-items-center">
-                    <img
-                        src="https://mdbootstrap.com/img/new/avatars/6.jpg"
-                        class="rounded-circle"
-                        alt=""
-                        style="width: 45px; height: 45px"
-                        />
-                    <div class="ms-3">
-                        <p class="fw-bold mb-1">Alex Ray</p>
-                        <p class="text-muted mb-0">alex.ray@gmail.com</p>
-                    </div>
-                    </div>
-                </td>
-                <td>
-                    <p class="fw-normal mb-1">Consultant</p>
-                    <p class="text-muted mb-0">Finance</p>
-                </td>
-                <td>
-                    <span class="badge badge-primary rounded-pill d-inline"
-                        >Onboarding</span
-                    >
-                </td>
-                <td>Junior</td>
-                <td>
-                    <button
-                            type="button"
-                            class="btn btn-link btn-rounded btn-sm fw-bold"
-                            data-mdb-ripple-color="dark"
-                            >
-                    Edit
-                    </button>
-                </td>
-                </tr>
-                <tr>
-                <td>
-                    <div class="d-flex align-items-center">
-                    <img
-                        src="https://mdbootstrap.com/img/new/avatars/7.jpg"
-                        class="rounded-circle"
-                        alt=""
-                        style="width: 45px; height: 45px"
-                        />
-                    <div class="ms-3">
-                        <p class="fw-bold mb-1">Kate Hunington</p>
-                        <p class="text-muted mb-0">kate.hunington@gmail.com</p>
-                    </div>
-                    </div>
-                </td>
-                <td>
-                    <p class="fw-normal mb-1">Designer</p>
-                    <p class="text-muted mb-0">UI/UX</p>
-                </td>
-                <td>
-                    <span class="badge badge-warning rounded-pill d-inline">Awaiting</span>
-                </td>
-                <td>Senior</td>
-                <td>
-                    <button
-                            type="button"
-                            class="btn btn-link btn-rounded btn-sm fw-bold"
-                            data-mdb-ripple-color="dark"
-                            >
-                    Edit
-                    </button>
-                </td>
-                </tr>
-            </tbody>
+                        </div>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">Title</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">description</p>
+                    </td>
+                    <td>
+                        <span class="badge badge-success rounded-pill d-inline">Type</span>
+                    </td>
+                    <td>1</td>
+                    <td>10,50</td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded">
+                        Edit
+                        </button>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded">
+                        Delete
+                        </button>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded">
+                        View
+                        </button>
+                    </td>
+                    </tr>
+                </tbody>
             </table>
+            <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+      <th scope="col">Handle</th>
+      <th scope="col">Handle</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+      <td>@mdo</td>
+      <td>@mdo</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+      <td>@fat</td>
+      <td>@fat</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2">Larry the Bird</td>
+      <td>@twitter</td>
+      <td>@twitter</td>
+      <td>@twitter</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
         </div>
     </main>
     <!--Main layout-->
