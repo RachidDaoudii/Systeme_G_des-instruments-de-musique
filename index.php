@@ -1,11 +1,10 @@
+<?php include('database.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" href="assets/css/style.css">
     <!-- Font Awesome -->
     <link
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -21,6 +20,7 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.css"
     rel="stylesheet"
     />
+    <link rel="stylesheet" href="assets/css/style.css">
     <title>Musique</title>
 </head>
 <body>
@@ -39,14 +39,14 @@
             aria-current="true"
             >
             <i class="fas fa-tachometer-alt fa-fw me-3"></i
-                ><span>Main dashboard</span>
+                ><span>dashboard</span>
             </a>
             <a
             href="#"
             class="list-group-item list-group-item-action py-2 ripple"
             >
             <i class="fas fa-chart-area fa-fw me-3"></i
-                ><span>Webiste traffic</span>
+                ><span>profile</span>
             </a>
             <a
             href="#"
@@ -109,11 +109,7 @@
                 class="dropdown-menu dropdown-menu-end"
                 aria-labelledby="navbarDropdownMenuLink"
                 >
-                <li><a class="dropdown-item" href="#">Some news</a></li>
-                <li><a class="dropdown-item" href="#">Another news</a></li>
-                <li>
-                <a class="dropdown-item" href="#">Something else here</a>
-                </li>
+                <li><a class="dropdown-item" href="#">#</a></li>
             </ul>
             </li>
             <!-- Avatar -->
@@ -133,14 +129,13 @@
                     alt=""
                     loading="lazy"
                 />
-                <div class="name p-1">Rachid Daoudi</div>
+                <div class="name p-2">Rachid Daoudi</div>
             </a>
             <ul
                 class="dropdown-menu dropdown-menu-end"
                 aria-labelledby="navbarDropdownMenuLink"
                 >
                 <li><a class="dropdown-item" href="#">My profile</a></li>
-                <li><a class="dropdown-item" href="#">Settings</a></li>
                 <li><a class="dropdown-item" href="#">Logout</a></li>
             </ul>
             </li>
@@ -153,9 +148,11 @@
     <!--Main Navigation-->
 
     <!--Main layout-->
-    <main style="margin-top: 58px">
+    <main>
         <div class="container pt-4">
-
+            <div class="d-flex justify-content-end">
+            <button class="btn btn-primary" type="button" data-mdb-toggle="modal" data-mdb-target="#exampleModal">Add</button>
+            </div>
              <!--Section: Minimal statistics cards-->
                 <!-- <section>
                 <div class="row">
@@ -222,101 +219,199 @@
                 </div>
                 </section> -->
                 <!--Section: Minimal statistics cards-->
-            <table class="table align-middle mb-0 bg-white">
-                <thead class="bg-light">
-                    <tr>
-                    <th scope="col">image</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Quantite</th>
-                    <th scope="col">Prix</th>
-                    <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    <td>
-                        <div class="d-flex align-items-center">
-                        <img
-                            src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-                            alt=""
-                            style="width: 45px; height: 45px"
-                            class="rounded-circle"
-                        />
-                        </div>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1">Title</p>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1">description</p>
-                    </td>
-                    <td>
-                        <span class="badge badge-success rounded-pill d-inline">Type</span>
-                    </td>
-                    <td>1</td>
-                    <td>10,50</td>
-                    <td>
-                        <button type="button" class="btn btn-link btn-sm btn-rounded">
-                        Edit
-                        </button>
-                        <button type="button" class="btn btn-link btn-sm btn-rounded">
-                        Delete
-                        </button>
-                        <button type="button" class="btn btn-link btn-sm btn-rounded">
-                        View
-                        </button>
-                    </td>
-                    </tr>
-                </tbody>
-            </table>
-            <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-      <th scope="col">Handle</th>
-      <th scope="col">Handle</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <td>@fat</td>
-      <td>@fat</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-      <td>@twitter</td>
-      <td>@twitter</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
+            <section>
+                <div class="table-responsive col-lg-12">
+                    <table class="table align-middle mb-0 bg-white">
+                        <thead class="bg-light">
+                            <tr>
+                                <th >image</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Type</th>
+                                <th>Quantite</th>
+                                <th>Prix</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                <img
+                                    src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                                    alt=""
+                                    style="width: 45px; height: 45px"
+                                    class="rounded-circle"
+                                />
+                                </div>
+                            </td>
+                            <td>
+                                <p class="fw-normal mb-1">Title</p>
+                            </td>
+                            <td>
+                                <p class="fw-normal mb-1">description</p>
+                            </td>
+                            <td>
+                                <span class="badge badge-success rounded-pill d-inline">Type</span>
+                            </td>
+                            <td>1</td>
+                            <td>10,50</td>
+                            <td>
+                                <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                Edit
+                                </button>
+                                <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                Delete
+                                </button>
+                                <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                View
+                                </button>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                <img
+                                    src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                                    alt=""
+                                    style="width: 45px; height: 45px"
+                                    class="rounded-circle"
+                                />
+                                </div>
+                            </td>
+                            <td>
+                                <p class="fw-normal mb-1">Title</p>
+                            </td>
+                            <td>
+                                <p class="fw-normal mb-1">description</p>
+                            </td>
+                            <td>
+                                <span class="badge badge-success rounded-pill d-inline">Type</span>
+                            </td>
+                            <td>1</td>
+                            <td>10,50</td>
+                            <td>
+                                <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                Edit
+                                </button>
+                                <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                Delete
+                                </button>
+                                <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                View
+                                </button>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                <img
+                                    src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                                    alt=""
+                                    style="width: 45px; height: 45px"
+                                    class="rounded-circle"
+                                />
+                                </div>
+                            </td>
+                            <td>
+                                <p class="fw-normal mb-1">Title</p>
+                            </td>
+                            <td>
+                                <p class="fw-normal mb-1">description</p>
+                            </td>
+                            <td>
+                                <span class="badge badge-success rounded-pill d-inline">Type</span>
+                            </td>
+                            <td>1</td>
+                            <td>10,50</td>
+                            <td>
+                                <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                Edit
+                                </button>
+                                <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                Delete
+                                </button>
+                                <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                View
+                                </button>
+                            </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
         </div>
     </main>
     <!--Main layout-->
+    <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="" class="needs-validation" novalidate>
+                    <div class="form-outline mb-4">
+                    <input type="file" class="form-control" name="image" required />
+                    </div>
+                    <div class="form-outline mb-4">
+                        <input type="text" class="form-control" name="title" id="title" required />
+                        <label for="title" class="form-label">Title</label>
+                    </div>
+                    <!-- <div class="form-outline mb-4">
+                        <select class="select">
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        </select>
+                    </div> -->
+                    <div class="form-outline mb-4">
+                        <input type="text" class="form-control" name="quantite" id="Quantite" required />
+                        <label for="Quantite" class="form-label">Quantite</label>
+                    </div>
+                    <div class="form-outline mb-4">
+                        <input type="text" class="form-control" id="Prix" name="prix" required />
+                        <label for="Prix" class="form-label">Prix</label>
+                    </div>
+                    <div class="form-outline mb-4">
+                        <textarea class="form-control" name="Description" id="Description" cols="10" rows="10" required></textarea>
+                        <label for="Description" class="form-label">Description</label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" name="save">Save</button>
+                    </div>
+                </form>
+            </div>
+            
+            </div>
+        </div>
+        </div>
+    <!-- Modal -->
 </body>
 <!-- MDB -->
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+(() => {
+    'use strict';
+  
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.needs-validation');
+  
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms).forEach((form) => {
+      form.addEventListener('submit', (event) => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  })();
+</script>
 <script src="assets/js/main.js"></script>
 <script
   type="text/javascript"

@@ -1,3 +1,4 @@
+<?php include('database.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +19,9 @@
         <div class="w-50 mx-auto">
             <div class="w-100 mt-5">
                 <!-- Pills navs -->
+                <div class="contentLogo">
+                    <p class="logo">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id deleniti corporis iure laboriosam non.</p>
+                </div>
                 <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
                 <li class="nav-item" role="presentation">
                     <a class="nav-link active" id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
@@ -63,12 +67,8 @@
                                 <label class="form-label" for="loginPassword">Password</label>
                             </div>
                             <!-- Submit button -->
-                            <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+                            <button type="submit" class="btn btn-primary btn-block mb-4" name="signup">Sign in</button>
                             <!-- Register buttons -->
-                            <div class="text-center">
-                                <p>Not a member? <a href="#!">Register</a></p>
-                                
-                            </div>
                         </form>
                     </div>
                     <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
@@ -120,7 +120,6 @@
                                 <input type="password" id="registerRepeatPassword" class="form-control" required />
                                 <label class="form-label" for="registerRepeatPassword">Repeat password</label>
                             </div>
-
                             <!-- Checkbox -->
                             <div class="form-check d-flex justify-content-center mb-4">
                                 <input class="form-check-input me-2" type="checkbox" value="" id="registerCheck" checked
@@ -130,7 +129,7 @@
                                 </label>
                             </div>
                             <!-- Submit button -->
-                            <button type="submit" class="btn btn-primary btn-block mb-3">Sign in</button>
+                            <button type="submit" class="btn btn-primary btn-block mb-3" name="register">Sign in</button>
                         </form>
                     </div>
                 </div>
