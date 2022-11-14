@@ -24,139 +24,13 @@
     <title>Musique</title>
 </head>
 <body>
-    <!--Main Navigation-->
-    <header>
-    <!-- Sidebar -->
-    <nav
-        id="sidebarMenu"
-        class="collapse d-lg-block sidebar collapse bg-white"
-        >
-        <div class="position-sticky">
-        <div class="list-group list-group-flush mx-3 mt-4">
-            <a
-            href="#"
-            class="list-group-item list-group-item-action py-2 ripple"
-            aria-current="true"
-            >
-            <i class="fas fa-tachometer-alt fa-fw me-3"></i
-                ><span>dashboard</span>
-            </a>
-            <a
-            href="#"
-            class="list-group-item list-group-item-action py-2 ripple"
-            >
-            <i class="fas fa-chart-area fa-fw me-3"></i
-                ><span>profile</span>
-            </a>
-            <a
-            href="#"
-            class="list-group-item list-group-item-action py-2 ripple"
-            ><i class="fas fa-users fa-fw me-3"></i><span>Users</span></a
-            >
-        </div>
-        </div>
-    </nav>
-    <!-- Sidebar -->
-
-    <!-- Navbar -->
-    <nav
-        id="main-navbar"
-        class="navbar navbar-expand-lg navbar-light bg-white fixed-top"
-        >
-        <!-- Container wrapper -->
-        <div class="container-fluid">
-        <!-- Toggle button -->
-        <button
-                class="navbar-toggler"
-                type="button"
-                data-mdb-toggle="collapse"
-                data-mdb-target="#sidebarMenu"
-                aria-controls="sidebarMenu"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-                >
-            <i class="fas fa-bars"></i>
-        </button>
-
-        <!-- Brand -->
-        <a class="navbar-brand" href="#">
-            <img src="assets/img/logo.png" height="40" alt="" loading="lazy" />
-        </a>
-        <!-- Search form -->
-        <form class="d-none d-md-flex input-group w-auto my-auto">
-            <input autocomplete="off" type="search" class="form-control rounded" placeholder='Search' style="min-width: 225px" />
-            <span class="input-group-text border-0"
-                ><i class="fas fa-search"></i
-            ></span>
-        </form>
-        <!-- Right links -->
-        <ul class="navbar-nav ms-auto d-flex flex-row align-items-center">
-            <li class="nav-item dropdown">
-            <a
-                class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow"
-                href="#"
-                id="navbarDropdownMenuLink"
-                role="button"
-                data-mdb-toggle="dropdown"
-                aria-expanded="false"
-                >
-                <i class="fas fa-bell"></i>
-                <span class="badge rounded-pill badge-notification bg-danger"
-                    >1</span
-                >
-            </a>
-            <ul
-                class="dropdown-menu dropdown-menu-end"
-                aria-labelledby="navbarDropdownMenuLink"
-                >
-                <li><a class="dropdown-item" href="#">#</a></li>
-            </ul>
-            </li>
-            <!-- Avatar -->
-            <li class="nav-item dropdown">
-            <a
-                class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center position-relative"
-                href="#"
-                id="navbarDropdownMenuLink"
-                role="button"
-                data-mdb-toggle="dropdown"
-                aria-expanded="false"
-                >
-                <div  class=" position-relative">
-                <img
-                    src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
-                    class="rounded-circle"
-                    height="40"
-                    alt=""
-                    loading="lazy"
-                /><span class="position-absolute top-0 start-100 translate-middle rounded-circle bg-success p-2"><span class="visually-hidden">unread messages</span></span>
-                </div>
-                <div class="name p-2">Rachid Daoudi</div>
-            </a>
-            <ul
-                class="dropdown-menu dropdown-menu-end"
-                aria-labelledby="navbarDropdownMenuLink"
-                >
-                <li><a class="dropdown-item" href="#">My profile</a></li>
-                <li><a class="dropdown-item" href="#">Logout</a></li>
-            </ul>
-            </li>
-        </ul>
-        </div>
-        <!-- Container wrapper -->
-    </nav>
-    <!-- Navbar -->
-    </header>
-    <!--Main Navigation-->
-
+<?php include('sidebar.php'); ?>
+<?php include('navbar.php'); ?>
     <!--Main layout-->
     <main>
         <div class="container pt-4">
-            <div class="d-flex justify-content-end">
-            <button class="btn btn-primary" type="button" data-mdb-toggle="modal" data-mdb-target="#exampleModal">Add</button>
-            </div>
              <!--Section: Minimal statistics cards-->
-                <!-- <section>
+                <section>
                 <div class="row">
                     <div class="col-xl-3 col-sm-6 col-12 mb-4">
                     <div class="card">
@@ -219,20 +93,70 @@
                     </div>
                     </div>
                 </div>
-                </section> -->
+                </section>
                 <!--Section: Minimal statistics cards-->
             <section>
-                <div class="table-responsive col-lg-12">
-                    <table class="table align-middle mb-0 bg-white">
+                <div class="row">
+                    <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                        <div class="card text-center">
+                            <div class="card-header">Nom Prenom</div>
+                            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                                <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" class="rounded-circle" height="200"/>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Email@gmail.com</p>
+                                <p class="card-text">City</p>
+                            </div>
+                            <div class="card-footer text-muted"><i class="fas fa-laptop text-danger"></i>Connected</div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                        <div class="card text-center">
+                            <div class="card-header">Nom Prenom</div>
+                            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                                <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" class="rounded-circle" height="200"/>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Email@gmail.com</p>
+                                <p class="card-text">City</p>
+                            </div>
+                            <div class="card-footer text-muted"><i class="fas fa-laptop text-danger"></i>Connected</div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                        <div class="card text-center">
+                            <div class="card-header">Nom Prenom</div>
+                            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                                <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" class="rounded-circle" height="200"/>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Email@gmail.com</p>
+                                <p class="card-text">City</p>
+                            </div>
+                            <div class="card-footer text-muted"><i class="fas fa-laptop text-danger"></i>Connected</div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                        <div class="card text-center">
+                            <div class="card-header">Nom Prenom</div>
+                            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                                <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" class="rounded-circle" height="200"/>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Email@gmail.com</p>
+                                <p class="card-text">City</p>
+                            </div>
+                            <div class="card-footer text-muted"><i class="fas fa-laptop text-danger"></i>Connected</div>
+                        </div>
+                    </div>
+                    <!-- <table class="table align-middle mb-0 bg-white">
                         <thead class="bg-light">
                             <tr>
-                                <th >image</th>
-                                <th>Title</th>
-                                <th>Description</th>
-                                <th>Type</th>
-                                <th>Quantite</th>
-                                <th>Prix</th>
-                                <th>Actions</th>
+                            <th>Name</th>
+                            <th>Title</th>
+                            <th>Status</th>
+                            <th>Position</th>
+                            <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -244,27 +168,22 @@
                                     alt=""
                                     style="width: 45px; height: 45px"
                                     class="rounded-circle"
-                                />
+                                    />
+                                <div class="ms-3">
+                                    <p class="fw-bold mb-1">John Doe</p>
+                                    <p class="text-muted mb-0">john.doe@gmail.com</p>
+                                </div>
                                 </div>
                             </td>
                             <td>
-                                <p class="fw-normal mb-1">Title</p>
+                                <p class="fw-normal mb-1">Software engineer</p>
+                                <p class="text-muted mb-0">IT department</p>
                             </td>
                             <td>
-                                <p class="fw-normal mb-1">description</p>
+                                <span class="badge badge-success rounded-pill d-inline">Active</span>
                             </td>
+                            <td>Senior</td>
                             <td>
-                                <span class="badge badge-success rounded-pill d-inline">Type</span>
-                            </td>
-                            <td>1</td>
-                            <td>10,50</td>
-                            <td>
-                                <button type="button" class="btn btn-link btn-sm btn-rounded">
-                                Edit
-                                </button>
-                                <button type="button" class="btn btn-link btn-sm btn-rounded">
-                                Delete
-                                </button>
                                 <button type="button" class="btn btn-link btn-sm btn-rounded">
                                 View
                                 </button>
@@ -274,32 +193,33 @@
                             <td>
                                 <div class="d-flex align-items-center">
                                 <img
-                                    src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                                    src="https://mdbootstrap.com/img/new/avatars/6.jpg"
+                                    class="rounded-circle"
                                     alt=""
                                     style="width: 45px; height: 45px"
-                                    class="rounded-circle"
-                                />
+                                    />
+                                <div class="ms-3">
+                                    <p class="fw-bold mb-1">Alex Ray</p>
+                                    <p class="text-muted mb-0">alex.ray@gmail.com</p>
+                                </div>
                                 </div>
                             </td>
                             <td>
-                                <p class="fw-normal mb-1">Title</p>
+                                <p class="fw-normal mb-1">Consultant</p>
+                                <p class="text-muted mb-0">Finance</p>
                             </td>
                             <td>
-                                <p class="fw-normal mb-1">description</p>
+                                <span class="badge badge-primary rounded-pill d-inline"
+                                    >Onboarding</span
+                                >
                             </td>
+                            <td>Junior</td>
                             <td>
-                                <span class="badge badge-success rounded-pill d-inline">Type</span>
-                            </td>
-                            <td>1</td>
-                            <td>10,50</td>
-                            <td>
-                                <button type="button" class="btn btn-link btn-sm btn-rounded">
-                                Edit
-                                </button>
-                                <button type="button" class="btn btn-link btn-sm btn-rounded">
-                                Delete
-                                </button>
-                                <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                <button
+                                        type="button"
+                                        class="btn btn-link btn-rounded btn-sm fw-bold"
+                                        data-mdb-ripple-color="dark"
+                                        >
                                 View
                                 </button>
                             </td>
@@ -308,112 +228,45 @@
                             <td>
                                 <div class="d-flex align-items-center">
                                 <img
-                                    src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                                    src="https://mdbootstrap.com/img/new/avatars/7.jpg"
+                                    class="rounded-circle"
                                     alt=""
                                     style="width: 45px; height: 45px"
-                                    class="rounded-circle"
-                                />
+                                    />
+                                <div class="ms-3">
+                                    <p class="fw-bold mb-1">Kate Hunington</p>
+                                    <p class="text-muted mb-0">kate.hunington@gmail.com</p>
+                                </div>
                                 </div>
                             </td>
                             <td>
-                                <p class="fw-normal mb-1">Title</p>
+                                <p class="fw-normal mb-1">Designer</p>
+                                <p class="text-muted mb-0">UI/UX</p>
                             </td>
                             <td>
-                                <p class="fw-normal mb-1">description</p>
+                                <span class="badge badge-warning rounded-pill d-inline">Awaiting</span>
                             </td>
+                            <td>Senior</td>
                             <td>
-                                <span class="badge badge-success rounded-pill d-inline">Type</span>
-                            </td>
-                            <td>1</td>
-                            <td>10,50</td>
-                            <td>
-                                <button type="button" class="btn btn-link btn-sm btn-rounded">
-                                Edit
-                                </button>
-                                <button type="button" class="btn btn-link btn-sm btn-rounded">
-                                Delete
-                                </button>
-                                <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                <button
+                                        type="button"
+                                        class="btn btn-link btn-rounded btn-sm fw-bold"
+                                        data-mdb-ripple-color="dark"
+                                        >
                                 View
                                 </button>
                             </td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table> -->
                 </div>
             </section>
             
         </div>
     </main>
     <!--Main layout-->
-    <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add</h5>
-                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="" method="" class="needs-validation" novalidate>
-                    <div class="form-outline mb-4">
-                    <input type="file" class="form-control" name="image" required />
-                    </div>
-                    <div class="form-outline mb-4">
-                        <input type="text" class="form-control" name="title" id="title" required />
-                        <label for="title" class="form-label">Title</label>
-                    </div>
-                    <!-- <div class="form-outline mb-4">
-                        <select class="select">
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        </select>
-                    </div> -->
-                    <div class="form-outline mb-4">
-                        <input type="text" class="form-control" name="quantite" id="Quantite" required />
-                        <label for="Quantite" class="form-label">Quantite</label>
-                    </div>
-                    <div class="form-outline mb-4">
-                        <input type="text" class="form-control" id="Prix" name="prix" required />
-                        <label for="Prix" class="form-label">Prix</label>
-                    </div>
-                    <div class="form-outline mb-4">
-                        <textarea class="form-control" name="Description" id="Description" cols="10" rows="10" required></textarea>
-                        <label for="Description" class="form-label">Description</label>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" name="save">Save</button>
-                    </div>
-                </form>
-            </div>
-            
-            </div>
-        </div>
-        </div>
-    <!-- Modal -->
 </body>
 <!-- MDB -->
-<script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-(() => {
-    'use strict';
-  
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    const forms = document.querySelectorAll('.needs-validation');
-  
-    // Loop over them and prevent submission
-    Array.prototype.slice.call(forms).forEach((form) => {
-      form.addEventListener('submit', (event) => {
-        if (!form.checkValidity()) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    });
-  })();
-</script>
 <script src="assets/js/main.js"></script>
 <script
   type="text/javascript"

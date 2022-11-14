@@ -1,4 +1,7 @@
-<?php include('database.php'); ?>
+<?php
+    include('scripts.php');
+    include('database.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,6 +25,17 @@
                 <div class="contentLogo">
                     <p class="logo">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id deleniti corporis iure laboriosam non.</p>
                 </div>
+                <!-- session erreur -->
+                <?php if(isset($_SESSION['erreur'])):  ?>
+                    <div class="alert alert-red alert-dismissible fade show">
+                    <strong>Erreur!</strong>
+                    <?php 
+                        echo $_SESSION['erreur']; 
+                        unset($_SESSION['erreur']);
+                    ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></span>
+                </div>
+                <?php endif ?>
                 <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
                 <li class="nav-item" role="presentation">
                     <a class="nav-link active" id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
@@ -58,8 +72,8 @@
                             <p class="text-center">or:</p>
                             <!-- Email input -->
                             <div class="form-outline mb-4">
-                                <input type="text" id="loginName" name="loginName" class="form-control" required  />
-                                <label class="form-label" for="loginName">Email or username</label>
+                                <input type="text" id="loginName" name="loginEmail" class="form-control" required  />
+                                <label class="form-label" for="loginName">Email</label>
                             </div>
                             <!-- Password input -->
                             <div class="form-outline mb-4">
@@ -93,25 +107,25 @@
 
                             <!-- Name input -->
                             <div class="form-outline mb-4">
-                                <input type="text" id="registerName" name="registerName" class="form-control" required />
-                                <label class="form-label" for="registerName">Name</label>
+                                <input type="text" id="registerName" name="registerFirstName" class="form-control" required />
+                                <label class="form-label" for="registerName">first name</label>
                             </div>
 
                             <!-- Username input -->
                             <div class="form-outline mb-4">
-                                <input type="text" id="registerUsername" name="registerUsername" class="form-control" required/>
-                                <label class="form-label" for="registerUsername">Username</label>
+                                <input type="text" id="registerUsername" name="registerLastName" class="form-control" required/>
+                                <label class="form-label" for="registerUsername">last name</label>
                             </div>
 
                             <!-- Email input -->
                             <div class="form-outline mb-4">
-                                <input type="email" id="registerEmail" class="form-control" required />
+                                <input type="email" id="registerEmail" name="registerEmail" class="form-control" required />
                                 <label class="form-label" for="registerEmail">Email</label>
                             </div>
 
                             <!-- Password input -->
                             <div class="form-outline mb-4">
-                                <input type="password" id="registerPassword" class="form-control" required />
+                                <input type="password" id="registerPassword" name="registerPassword" class="form-control" required />
                                 <label class="form-label" for="registerPassword">Password</label>
                             </div>
 
@@ -138,31 +152,12 @@
         </div>
     </div>
     <!-- MDB -->
-<script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-(() => {
-    'use strict';
-  
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    const forms = document.querySelectorAll('.needs-validation');
-  
-    // Loop over them and prevent submission
-    Array.prototype.slice.call(forms).forEach((form) => {
-      form.addEventListener('submit', (event) => {
-        if (!form.checkValidity()) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    });
-  })();
-</script>
+<script src="assets/js/main.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.js"></script>
 <!-- <script src="assets/js/bootstrap.js"></script>
 <script src="assets/js/bootstrap.min.js"></script> -->
 <!-- <script src="assets/js/jquery-3.6.1.min.js"></script> -->
-<script src="assets/js/main.js"></script>
+
 <!-- <script src="assets/js/parsley.js"></script> -->
 <!-- <script src="https://parsleyjs.org/dist/parsley.js"></script> -->
 </body>
