@@ -163,49 +163,42 @@
                     <div class="form-outline">
                     <input type="text" class="form-control" id="validationCustom01" required />
                     <label for="validationCustom01" class="form-label">first name</label>
-                    <div class="valid-feedback">Looks good!</div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-outline">
                     <input type="text" class="form-control" id="validationCustom02" required />
                     <label for="validationCustom02" class="form-label">last name</label>
-                    <div class="valid-feedback">Looks good!</div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-outline">
                     <input type="date" class="form-control" id="validationCustom02" required />
                     <label for="validationCustom02" class="form-label">Date</label>
-                    <div class="valid-feedback">Looks good!</div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-outline">
                     <input type="text" class="form-control" id="validationCustom02" required />
                     <label for="validationCustom02" class="form-label">City</label>
-                    <div class="valid-feedback">Looks good!</div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-outline">
-                    <input type="text" class="form-control" id="validationCustom02" required />
+                    <input type="email" class="form-control" id="validationCustom02" required />
                     <label for="validationCustom02" class="form-label">Email</label>
-                    <div class="valid-feedback">Looks good!</div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-outline">
-                    <input type="text" class="form-control" id="validationCustom02" required />
+                    <input type="password" class="form-control" id="validationCustom02" required />
                     <label for="validationCustom02" type="password" class="form-label">Password</label>
-                    <div class="valid-feedback">Looks good!</div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-outline">
-                    <input type="text" class="form-control" id="validationCustom02" required />
+                    <input type="password" class="form-control" id="validationCustom02" required />
                     <label for="validationCustom02" type="password" class="form-label">Repeat Password</label>
-                    <div class="valid-feedback">Looks good!</div>
                     </div>
                 </div>
                 <div class="col-12">

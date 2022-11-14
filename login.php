@@ -58,7 +58,7 @@
                             <p class="text-center">or:</p>
                             <!-- Email input -->
                             <div class="form-outline mb-4">
-                                <input type="email" id="loginName" name="loginName" class="form-control" required  />
+                                <input type="text" id="loginName" name="loginName" class="form-control" required  />
                                 <label class="form-label" for="loginName">Email or username</label>
                             </div>
                             <!-- Password input -->

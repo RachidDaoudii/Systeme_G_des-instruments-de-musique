@@ -115,20 +115,22 @@
             <!-- Avatar -->
             <li class="nav-item dropdown">
             <a
-                class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center"
+                class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center position-relative"
                 href="#"
                 id="navbarDropdownMenuLink"
                 role="button"
                 data-mdb-toggle="dropdown"
                 aria-expanded="false"
                 >
+                <div  class=" position-relative">
                 <img
                     src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
                     class="rounded-circle"
                     height="40"
                     alt=""
                     loading="lazy"
-                />
+                /><span class="position-absolute top-0 start-100 translate-middle rounded-circle bg-success p-2"><span class="visually-hidden">unread messages</span></span>
+                </div>
                 <div class="name p-2">Rachid Daoudi</div>
             </a>
             <ul
