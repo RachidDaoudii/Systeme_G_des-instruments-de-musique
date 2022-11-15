@@ -21,19 +21,12 @@
     <div class="container">
         <div class="w-50 mx-auto">
             <div class="w-100 mt-5">
-                <!-- Pills navs -->
-                <div class="contentLogo">
-                    <p class="logo">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id deleniti corporis iure laboriosam non.</p>
-                </div>
                 <!-- session erreur -->
                 <?php if(isset($_SESSION['erreur'])):  ?>
-                    <div class="alert alert-red alert-dismissible fade show">
-                    <strong>Erreur!</strong>
                     <?php 
                         echo $_SESSION['erreur']; 
                         unset($_SESSION['erreur']);
                     ?>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></span>
                 </div>
                 <?php endif ?>
                 <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
@@ -72,8 +65,8 @@
                             <p class="text-center">or:</p>
                             <!-- Email input -->
                             <div class="form-outline mb-4">
-                                <input type="text" id="loginName" name="loginEmail" class="form-control" required  />
-                                <label class="form-label" for="loginName">Email</label>
+                                <input type="text" id="loginEmail" name="loginEmail" class="form-control" required  />
+                                <label class="form-label" for="loginEmail">Email</label>
                             </div>
                             <!-- Password input -->
                             <div class="form-outline mb-4">

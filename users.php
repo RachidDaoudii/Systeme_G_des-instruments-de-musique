@@ -1,4 +1,11 @@
-<?php include('database.php'); ?>
+<?php 
+    // include('database.php');
+    // include('scripts.php');
+	// if(!isset($_SESSION["user_name"]) && !isset($_SESSION['id'])){
+	// 	header("location: login.php");
+	// 	exit;
+	// }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

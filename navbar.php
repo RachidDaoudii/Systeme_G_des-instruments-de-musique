@@ -1,3 +1,8 @@
+<?php 
+    if(!isset($_SESSION)){
+        session_start();
+    }
+?>
 <!-- Navbar -->
 <nav
         id="main-navbar"
@@ -69,14 +74,18 @@
                     </span>
                     <img class="rounded-4 shadow-4" src="https://mdbootstrap.com/img/Photos/Avatars/man2.jpg" alt="Avatar" style="width: 30px; height: 30px;">
                 </div>
-                <div class="name p-2">Rachid Daoudi</div>
+                <div class="name p-2">
+                    <?php 
+                        echo $_SESSION['user_name']; 
+                    ?>
+                </div>
             </a>
             <ul
                 class="dropdown-menu dropdown-menu-end"
                 aria-labelledby="navbarDropdownMenuLink"
                 >
-                <li><a class="dropdown-item" href="profil.php">My profile</a></li>
-                <li><a class="dropdown-item" href="login.php">Logout</a></li>
+                <li><a class="dropdown-item" href="profil.php?id=<?php echo $_SESSION['id'];?>">My profile</a></li>
+                <li><a class="dropdown-item" href="logout.php">Logout</a></li>
             </ul>
             </li>
         </ul>
