@@ -46,11 +46,17 @@ function register(){
     // }else{
         $nom = $_POST['registerFirstName'];
         $prenom = $_POST['registerLastName'];
+        $image = addslashes($_FILES['registerImg']['tmp_name']);
+        $name  = addslashes($_FILES['registerImg']['tmp_name']);
+        $image = file_get_contents($image);
+        $image = base64_encode($image);
+        $date = $_POST['registerDate'];
+        $city = $_POST['registerCity'];
         $email = $_POST['registerEmail'];
         $password = $_POST['registerPassword'];
         // $md5password = md5($password);
         $sql ="INSERT INTO `admins`(`nom`, `prenom`, `image`, `dateNaissance`, `ville`, `email`, `password`, `id_instrument`) 
-        VALUES ('$nom','$prenom',NULL,NULL,NULL,'$email','$password',NULL)";
+        VALUES ('$nom','$prenom','$image','$date','$city','$email','$password',NULL)";
         $res = mysqli_query($connection,$sql);
         $_SESSION['erreur'] = "Erreur";
         header("Location: login.php");
@@ -59,14 +65,14 @@ function register(){
 
 function users(){
     global $connection;
-    $sql ="SELECT * from `admins` limit 4";
+    $sql ="SELECT * from `admins` limit 5";
     $res =mysqli_query($connection,$sql);
     while ($element = mysqli_fetch_assoc($res)){?>
         <div class="col-xl-3 col-sm-6 col-12 mb-4">
             <div class="card text-center">
                 <div class="card-header"><?php echo $element['nom']; ?></div>
                 <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                    <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" class="rounded-circle" height="150"/>
+                    <?php echo '<img src="data:image;base64,'.base64_encode($element['image']).'" class="rounded-circle" height="150"/>'; ?>
                 </div>
                 <div class="card-body">
                     <p class="card-text"><?php echo $element['email']; ?></p>

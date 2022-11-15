@@ -98,6 +98,12 @@
 
                             <p class="text-center">or:</p>
 
+                            <!-- img input -->
+                            <div class="form-outline mb-4">
+                                <input type="file" id="registerName" name="registerImg" class="form-control" required />
+                                <!-- <label class="form-label" for="registerName">image</label> -->
+                            </div>
+
                             <!-- Name input -->
                             <div class="form-outline mb-4">
                                 <input type="text" id="registerName" name="registerFirstName" class="form-control" required />
@@ -108,6 +114,18 @@
                             <div class="form-outline mb-4">
                                 <input type="text" id="registerUsername" name="registerLastName" class="form-control" required/>
                                 <label class="form-label" for="registerUsername">last name</label>
+                            </div>
+
+                            <!-- date input -->
+                            <div class="form-outline mb-4">
+                                <input type="date" id="registerUsername" name="registerDate" class="form-control" required/>
+                                <label class="form-label" for="registerUsername">date of birth</label>
+                            </div>
+
+                            <!-- city input -->
+                            <div class="form-outline mb-4">
+                                <input type="text" id="registerUsername" name="registerCity" class="form-control" required/>
+                                <label class="form-label" for="registerUsername">city</label>
                             </div>
 
                             <!-- Email input -->
