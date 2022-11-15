@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 14 nov. 2022 à 15:17
+-- Généré le : mar. 15 nov. 2022 à 16:25
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -41,7 +41,17 @@ CREATE TABLE IF NOT EXISTS `admins` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   KEY `id_instrument` (`id_instrument`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `admins`
+--
+
+INSERT INTO `admins` (`id`, `nom`, `prenom`, `image`, `dateNaissance`, `ville`, `email`, `password`, `id_instrument`) VALUES
+(1, 'Daoudi', 'Rachid', '', '1996-04-19', 'Agadir', 'daoudi@gmail.com', '123', 1),
+(2, 'fathi', 'amine', '', '2022-11-16', 'tiznit', 'test@gmail.com', '123', NULL),
+(3, 'mlkzfeÃ¹mlk', 'lmfklm', NULL, NULL, 'casa', 'mlkm@lkz.mlk', '!:l', NULL),
+(4, 'jamh', 'mohammed', NULL, NULL, 'agadir', 'med@gmail.com', '123', NULL);
 
 -- --------------------------------------------------------
 
