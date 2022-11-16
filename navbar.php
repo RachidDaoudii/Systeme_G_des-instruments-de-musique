@@ -84,7 +84,7 @@
                 class="dropdown-menu dropdown-menu-end"
                 aria-labelledby="navbarDropdownMenuLink"
                 >
-                <li><a class="dropdown-item" href="profil.php?id=<?php echo $_SESSION['id'];?>">My profile</a></li>
+                <li><a class="dropdown-item" href="profil.php">My profile</a></li>
                 <li><a class="dropdown-item" href="logout.php">Logout</a></li>
             </ul>
             </li>

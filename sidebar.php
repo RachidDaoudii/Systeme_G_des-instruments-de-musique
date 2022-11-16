@@ -21,19 +21,14 @@
                     ><span>dashboard</span>
                 </a>
                 <a
-                href="profil.php?id=<?php echo $_SESSION['id'];?>"
+                href="profil.php"
                 class="list-group-item list-group-item-action py-2 ripple"
                 >
                 <i class="fas fa-chart-area fa-fw me-3"></i
                     ><span>profile</span>
                 </a>
                 <a
-                href="users.php?id=<?php echo $_SESSION['id'];?>"
-                class="list-group-item list-group-item-action py-2 ripple"
-                ><i class="fas fa-users fa-fw me-3"></i><span>Users</span></a
-                >
-                <a
-                href="instruments.php?id=<?php echo $_SESSION['id'];?>"
+                href="instruments.php"
                 class="list-group-item list-group-item-action py-2 ripple"
                 ><i class="fas fa-users fa-fw me-3"></i><span>Instruments</span></a
                 >

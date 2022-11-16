@@ -4,6 +4,8 @@ session_start();
 if(isset($_POST['signup']))            Signup();
 if(isset($_POST['register']))          register();
 if(isset($_POST['updateProfil']))      profil();
+if(isset($_POST['save']))              AddInstruments();
+if(isset($_GET['id']))              Delete();
 
 
 function Validation($input){
@@ -46,33 +48,39 @@ function register(){
     // }else{
         $nom = $_POST['registerFirstName'];
         $prenom = $_POST['registerLastName'];
-        $image = addslashes($_FILES['registerImg']['tmp_name']);
-        $name  = addslashes($_FILES['registerImg']['tmp_name']);
-        $image = file_get_contents($image);
-        $image = base64_encode($image);
+            //uniqid pathinfo  +
+        $image = $_FILES["image"]["name"];
+        $tempname = $_FILES["image"]["tmp_name"];
+        $folder = "./assets/user/" . $image;
+
         $date = $_POST['registerDate'];
         $city = $_POST['registerCity'];
         $email = $_POST['registerEmail'];
         $password = $_POST['registerPassword'];
         // $md5password = md5($password);
-        $sql ="INSERT INTO `admins`(`nom`, `prenom`, `image`, `dateNaissance`, `ville`, `email`, `password`, `id_instrument`) 
-        VALUES ('$nom','$prenom','$image','$date','$city','$email','$password',NULL)";
-        $res = mysqli_query($connection,$sql);
-        $_SESSION['erreur'] = "Erreur";
+        $sql ="INSERT INTO `admins`(`nom`, `prenom`, `image`, `dateNaissance`, `ville`, `email`, `password`) 
+        VALUES ('$nom','$prenom','$image','$date','$city','$email','$password')";
+        mysqli_query($connection,$sql);
+        // Now let's move the uploaded image into the folder: image
+        if (move_uploaded_file($tempname, $folder)) {
+            echo "<h3>  Image uploaded successfully!</h3>";
+        } else {
+            echo "<h3>  Failed to upload image!</h3>";
+        }
         header("Location: login.php");
     // }
 }
 
 function users(){
     global $connection;
-    $sql ="SELECT * from `admins` limit 5";
+    $sql ="SELECT * from `admins` limit 6";
     $res =mysqli_query($connection,$sql);
     while ($element = mysqli_fetch_assoc($res)){?>
         <div class="col-xl-3 col-sm-6 col-12 mb-4">
             <div class="card text-center">
                 <div class="card-header"><?php echo $element['nom']; ?></div>
                 <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                    <?php echo '<img src="data:image;base64,'.base64_encode($element['image']).'" class="rounded-circle" height="150"/>'; ?>
+                    <img src="./assets/user/<?php echo $element['image']; ?>" style="width: 150px;" class="rounded-circle">
                 </div>
                 <div class="card-body">
                     <p class="card-text"><?php echo $element['email']; ?></p>
@@ -84,7 +92,6 @@ function users(){
     <?php
     }
 }
-
 
 function profil(){
     global $connection;
@@ -102,8 +109,104 @@ function profil(){
     header("location: index.php");
 }
 
+function Counts(){
+    global $connection;
+    $sql="SELECT count(id) FROM admins";
+    $res = mysqli_query($connection,$sql);
+    $nbr= mysqli_fetch_array($res);
+    echo $nbr[0];
+}
+
+function CountsInstruments(){
+    global $connection;
+    $sql="SELECT count(id) FROM instruments";
+    $res = mysqli_query($connection,$sql);
+    $nbr= mysqli_fetch_array($res);
+    echo $nbr[0];
+}
+
+function category(){
+    global $connection;
+    $sql="SELECT * from types";
+    $res=mysqli_query($connection,$sql);
+    while($type = mysqli_fetch_assoc($res)){?>
+        <option value="<?php echo $type['id']?>"><?php echo $type['title']?></option>
+    <?php
+    }
+}
+
+function AddInstruments(){
+    global $connection;
+    $image = $_FILES["image"]["name"];
+    $tempname = $_FILES["image"]["tmp_name"];
+    $folder = "./assets/img/" . $image;
+
+    $title = $_POST['title'];
+    $quantite = $_POST['quantite'];
+    $prix = $_POST['prix'];
+    $types = $_POST['types'];
+    $sql="INSERT INTO `instruments`(`image`, `title`, `quantite`, `prix`, `id_type`) VALUES ('$image','$title','$quantite','$prix','$types')";
+    mysqli_query($connection,$sql);
+    // Now let's move the uploaded image into the folder: image
+    if (move_uploaded_file($tempname, $folder)) {
+        echo "<h3>  Image uploaded successfully!</h3>";
+    } else {
+        echo "<h3>  Failed to upload image!</h3>";
+    }
+    header("Location: instruments.php");
+}
+
+function DisplayInstruments(){
+    global $connection;
+    $nbr=1;
+    $sql ="SELECT ins.* ,ty.title as nameType FROM instruments as ins INNER JOIN types as ty ON ins.id_type = ty.id";
+    $res = mysqli_query($connection,$sql);
+    while($element = mysqli_fetch_assoc($res)){?>
+    
+        <tr id="<?php echo $element['id'];?>">
+            <td>
+                <?php echo $nbr;?>
+            </td>
+            <td>
+                <div class="d-flex align-items-center">
+                    <img src="./assets/img/<?php echo $element['image']; ?>" style="width: 45px; height: 45px" class="rounded-circle">
+                    <!-- <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt="" style="width: 45px; height: 45px" class="rounded-circle"/> -->
+                </div>
+            </td>
+            <td>
+                <p class="fw-normal mb-1" data="<?php echo $element['title'];?>" id="title"><?php echo $element['title'];?></p>
+            </td>
+            <td>
+                <span class="badge badge-success rounded-pill d-inline" data="<?php echo $element['nameType'];?>"><?php echo $element['nameType'];?></span>
+            </td>
+            <td>
+                <span data="<?php echo $element['quantite'];?>"><?php echo $element['quantite'];?></span>
+            </td>
+            <td>
+                <span data="<?php echo $element['prix'];?>"><?php echo $element['prix'];?></span>
+            </td>
+            <td>
+                <button type="button" class="btn btn-link btn-sm btn-rounded" data-mdb-toggle="modal" data-mdb-target="#exampleModal" onclick="returnInfo(<?php echo $element['id'];?>)"><i class="far fa-edit"></i></button>
+                <button type="button" class="btn btn-link btn-sm btn-rounded" name="delete" onclick="location.href='scripts.php?id=<?php echo $element['id']?>'"><i class="fas fa-trash"></i></button>
+                <button type="button" class="btn btn-link btn-sm btn-rounded" data-mdb-toggle="modal" data-mdb-target="#view" onclick="returnInfo(<?php echo $element['id'];?>)"><i class="far fa-eye"></i></button>
+            </td>
+        </tr>
+    <?php
+    $nbr++;
+    }
+}
 
 
+function Delete(){
+
+    //select path+unlink 
+    global $connection;
+    $id = $_GET['id'];
+    $sql="DELETE FROM `instruments` WHERE id=$id";
+    $res=mysqli_query($connection,$sql);
+    header("Location: instruments.php");
+    
+}
 
 
 
