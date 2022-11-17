@@ -1,27 +1,8 @@
 <?php
+    include('header.php');
     include('scripts.php');
     include('database.php');
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
-    <!-- MDB -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.css" rel="stylesheet"/>
-    <title>Login</title>
-    <!-- bootstrap -->
-    <!-- BEGIN parsley css-->
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/guillaumepotier/Parsley.js@2.9.2/doc/assets/docs.css"> -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/guillaumepotier/Parsley.js@2.9.2/src/parsley.css">
-    <!-- END parsley css-->
-</head>
-<body>
     <div class="container">
         <div class="w-50 mx-auto">
             <div class="w-100 mt-5">
@@ -71,14 +52,14 @@
                             </div>
                             <p class="text-center">or:</p>
                             <!-- Email input -->
-                            <div class="form-outline mb-4">
-                                <input type="text" id="loginEmail" name="loginEmail" class="form-control" required  />
+                            <div class=" mb-4">
                                 <label class="form-label" for="loginEmail">Email</label>
+                                <input type="text" id="loginEmail" name="loginEmail" class="form-control" placeholder="Email" required  />
                             </div>
                             <!-- Password input -->
-                            <div class="form-outline mb-4">
-                                <input type="password" id="loginPassword" name="loginPassword" class="form-control" required />
+                            <div class="mb-4">
                                 <label class="form-label" for="loginPassword">Password</label>
+                                <input type="password" id="loginPassword" name="loginPassword" placeholder="password" class="form-control" required />
                             </div>
                             <!-- Submit button -->
                             <button type="submit" class="btn btn-primary btn-block mb-4" name="signup">Sign in</button>
@@ -170,19 +151,6 @@
         </div>
     </div>
     <!-- MDB -->
-<script src="assets/js/main.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.js"></script>
-<!-- BEGIN jquery js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- END jquery js-->
-<!-- BEGIN parsley js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js" integrity="sha512-eyHL1atYNycXNXZMDndxrDhNAegH2BDWt1TmkXJPoGf1WLlNYt08CSjkqF5lnCRmdm3IrkHid8s2jOUY4NIZVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- END parsley js-->
-
-<!-- <script src="assets/js/bootstrap.js"></script>
-<script src="assets/js/bootstrap.min.js"></script> -->
-<!-- <script src="assets/js/jquery-3.6.1.min.js"></script> -->
-
-<!-- <script src="assets/js/parsley.js"></script> -->
-</body>
-</html>
+<?php 
+include('footer.php')
+?>

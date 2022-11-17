@@ -5,7 +5,8 @@ if(isset($_POST['signup']))            Signup();
 if(isset($_POST['register']))          register();
 if(isset($_POST['updateProfil']))      profil();
 if(isset($_POST['save']))              AddInstruments();
-if(isset($_GET['id']))              Delete();
+if(isset($_GET['id']))                 DeleteInstruments();
+if(isset($_POST['edit']))              EditInstruments();
 
 
 function Validation($input){
@@ -31,6 +32,8 @@ function Signup(){
         if ($row['email'] === $email && $row['password'] === $password) {
             $_SESSION['user_name'] = $row['nom'].' '.$row['prenom'];
             $_SESSION['id'] = $row['id'];
+            $_SESSION['image'] = $row['image'];
+            $_SESSION['online'] = 'on';
             header("Location: index.php");
         }
     }else{
@@ -49,7 +52,7 @@ function register(){
         $nom = $_POST['registerFirstName'];
         $prenom = $_POST['registerLastName'];
             //uniqid pathinfo  +
-        $image = $_FILES["image"]["name"];
+        $image = uniqid($_FILES["image"]["name"]);
         $tempname = $_FILES["image"]["tmp_name"];
         $folder = "./assets/user/" . $image;
 
@@ -73,7 +76,7 @@ function register(){
 
 function users(){
     global $connection;
-    $sql ="SELECT * from `admins` limit 6";
+    $sql ="SELECT * from `admins` limit 4";
     $res =mysqli_query($connection,$sql);
     while ($element = mysqli_fetch_assoc($res)){?>
         <div class="col-xl-3 col-sm-6 col-12 mb-4">
@@ -86,7 +89,7 @@ function users(){
                     <p class="card-text"><?php echo $element['email']; ?></p>
                     <p class="card-text"><?php echo $element['ville']; ?></p>
                 </div>
-                <div class="card-footer text-muted"><i class="fas fa-laptop text-danger"></i>Connected</div>
+                <div class="card-footer text-muted"><i class="fas fa-laptop on"></i>Connected</div>
             </div>
         </div>
     <?php
@@ -137,18 +140,20 @@ function category(){
 
 function AddInstruments(){
     global $connection;
-    $image = $_FILES["image"]["name"];
-    $tempname = $_FILES["image"]["tmp_name"];
-    $folder = "./assets/img/" . $image;
+    $image = uniqid();//name image
+    $tempname = $_FILES["image"]["name"];
+    $fileType= pathinfo($tempname, PATHINFO_EXTENSION);//png
+    $basename = $image . "." .$fileType; //name.png
+    $folder = "./assets/img/" . $basename;
 
     $title = $_POST['title'];
     $quantite = $_POST['quantite'];
     $prix = $_POST['prix'];
     $types = $_POST['types'];
-    $sql="INSERT INTO `instruments`(`image`, `title`, `quantite`, `prix`, `id_type`) VALUES ('$image','$title','$quantite','$prix','$types')";
+    $sql="INSERT INTO `instruments`(`image`, `title`, `quantite`, `prix`, `id_type`) VALUES ('$basename','$title','$quantite','$prix','$types')";
     mysqli_query($connection,$sql);
     // Now let's move the uploaded image into the folder: image
-    if (move_uploaded_file($tempname, $folder)) {
+    if (move_uploaded_file($_FILES["image"]["tmp_name"], $folder)) {
         echo "<h3>  Image uploaded successfully!</h3>";
     } else {
         echo "<h3>  Failed to upload image!</h3>";
@@ -197,17 +202,85 @@ function DisplayInstruments(){
 }
 
 
-function Delete(){
-
-    //select path+unlink 
+function DeleteInstruments(){
     global $connection;
     $id = $_GET['id'];
-    $sql="DELETE FROM `instruments` WHERE id=$id";
-    $res=mysqli_query($connection,$sql);
-    header("Location: instruments.php");
-    
+    $img="SELECT image from instruments where id = $id";
+    $sul=mysqli_query($connection,$img);
+    $resul=mysqli_fetch_assoc($sul);
+    $image=$resul['image'];
+    $path="./assets/img/".$image;
+    if(unlink($path)){
+        //select path+unlink 
+        $sql="DELETE FROM `instruments` WHERE id=$id";
+        mysqli_query($connection,$sql);
+        $_SESSION['msg']="Delete instrument";
+        header("Location: instruments.php");
+        
+    }else{
+        $_SESSION['erreur']="";
+        header("Location: instruments.php");
+    }
 }
 
+function EditInstruments(){
+    global $connection;
+    $id = $_POST['id'];
+    $image = $_FILES["image"]["name"];
+    $title = $_POST['title'];
+    $quantite = $_POST['quantite'];
+    $prix = $_POST['prix'];
+    $types = $_POST['types'];
+    if(empty($image)){
+        $sql="UPDATE `instruments` SET `title`='$title',`quantite`='$quantite',`prix`='$prix',`id_type`='$types' WHERE id=$id";
+        mysqli_query($connection,$sql);
+        header("Location: instruments.php");
+    }else{
+        $img="SELECT image from instruments where id = $id";
+        $sul=mysqli_query($connection,$img);
+        $resul=mysqli_fetch_assoc($sul);
+        $image=$resul['image'];
+        $path="./assets/img/".$image;
+        unlink($path);
+        
+        $image = uniqid($_FILES["image"]["name"]);
+        $tempname = $_FILES["image"]["tmp_name"];
+        $folder = "./assets/img/" . $image;
+
+        if (move_uploaded_file($tempname, $folder)) {
+            echo "<h3>  Image uploaded successfully!</h3>";
+        } else {
+            echo "<h3>  Failed to upload image!</h3>";
+        }
+
+        $sql="UPDATE `instruments` SET `image`='$image' WHERE id=$id";
+        mysqli_query($connection,$sql);
+
+
+        
+        header("Location: instruments.php");
+
+    }
+    
+    
+    // if (move_uploaded_file($tempname, $folder)) {
+    //     echo "<h3>  Image uploaded successfully!</h3>";
+    // } else {
+    //     echo "<h3>  Failed to upload image!</h3>";
+    // }
+    // $_SESSION['msg']="Edit instrument";
+    // header("Location: instruments.php");
+        
+}
+
+
+function infoUser($id){
+    global $connection;
+    $sql="SELECT * FROM admins where id =$id";
+    $res = mysqli_query($connection,$sql);
+    $element= mysqli_fetch_assoc($res);
+    return $element;
+}
 
 
 

@@ -1,38 +1,15 @@
 <?php 
+    include('header.php');
     include('database.php'); 
-    include('scripts.php'); 
+    include('scripts.php');
+    include('sidebar.php'); 
+    include('navbar.php');
     if(!isset($_SESSION["user_name"]) && !isset($_SESSION['id'])){
 		header("location: login.php");
 		exit;
 	}
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Font Awesome -->
-    <link
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    rel="stylesheet"
-    />
-    <!-- Google Fonts -->
-    <link
-    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-    rel="stylesheet"
-    />
-    <!-- MDB -->
-    <link
-    href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.css"
-    rel="stylesheet"
-    />
-    <link rel="stylesheet" href="assets/css/style.css">
-    <title>Musique</title>
-</head>
-<body>
-<?php include('sidebar.php'); ?>
-<?php include('navbar.php'); ?>
+
     <!--Main layout-->
     <main>
         <div class="container pt-4">
@@ -88,6 +65,7 @@
                         <input type="text" class="form-control" id="Prixmodel" name="prix"  />
                         <label for="Prix" class="form-label">Prix</label>
                     </div>
+                        <input type="hidden" id="idmodel" name="id">
                     <div class="form-outline mb-4">
                         <select name="types" id="typemodel" class="form-control">
                             <option value="">Types</option>
@@ -96,6 +74,7 @@
                     </div>
                     <div class="modal-footer">
                         <div class="btn btn-secondary" data-mdb-dismiss="modal">Close</div>
+                        <button type="submit" class="btn btn-warning" name="edit">Edit</button>
                         <button type="submit" class="btn btn-primary" name="save">Save</button>
                     </div>
                 </form>
@@ -142,16 +121,6 @@
         </div>
     <!-- Modal -->
 
-
-
-
-
-</body>
-<!-- MDB -->
-
-<script
-  type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.js"
-></script>
-<script src="assets/js/main.js"></script>
-</html>
+<?php 
+include('footer.php')
+?>

@@ -58,7 +58,10 @@
             </ul>
             </li>
             <!-- Avatar -->
-            
+            <?php 
+            $id = $_SESSION['id'];
+            $user = infoUser($id)
+            ?>
             <li class="nav-item dropdown">
             <a
                 class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center position-relative"
@@ -72,7 +75,7 @@
                     <span class="position-absolute top-0 start-100 translate-middle p-1 bg-success border border-light rounded-circle">
                         <span class="visually-hidden">New alerts</span>
                     </span>
-                    <img class="rounded-4 shadow-4" src="https://mdbootstrap.com/img/Photos/Avatars/man2.jpg" alt="Avatar" style="width: 30px; height: 30px;">
+                    <img class="rounded-4 shadow-4" src="./assets/user/<?php echo $user['image']?>" alt="Avatar" style="width: 30px; height: 30px;">
                 </div>
                 <div class="name p-2">
                     <?php 
