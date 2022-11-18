@@ -7,14 +7,25 @@
         <div class="w-50 mx-auto">
             <div class="w-100 mt-5">
                 <!-- session erreur -->
+                <?php if(isset($_SESSION['message'])):  ?>
+                    <div class="alert alert-success alert-dismissible fade show">
+                        <strong>Erreur!</strong>
+                        <?php 
+                            echo $_SESSION['message']; 
+                            unset($_SESSION['message']);
+                        ?>
+                        <button type="button" class="btn-close" data-mdb-dismiss="alert"></span>
+                    </div>
+                <?php endif ?>
+                <!-- session erreur -->
                 <?php if(isset($_SESSION['erreur'])):  ?>
-                    <div class="alert alert-red alert-dismissible fade show">
+                    <div class="alert alert-danger alert-dismissible fade show">
                         <strong>Erreur!</strong>
                         <?php 
                             echo $_SESSION['erreur']; 
                             unset($_SESSION['erreur']);
                         ?>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></span>
+                        <button type="button" class="btn-close" data-mdb-dismiss="alert"></span>
                     </div>
                 <?php endif ?>
                 <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
@@ -119,6 +130,7 @@
                             <!-- Email input -->
                             <div class="form-outline mb-4">
                                 <input type="email" id="registerEmail" name="registerEmail" class="form-control" required />
+                                <span id="msgsql"></span>
                                 <label class="form-label" for="registerEmail">Email</label>
                             </div>
 

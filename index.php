@@ -6,8 +6,9 @@
 		header("location: login.php");
 		exit;
 	}
-    include('sidebar.php'); 
+    
     include('navbar.php');
+    include('sidebar.php'); 
 ?>
     <!--Main layout-->
     <main>

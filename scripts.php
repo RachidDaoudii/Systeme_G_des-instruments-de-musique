@@ -9,6 +9,9 @@ if(isset($_GET['id']))                 DeleteInstruments();
 if(isset($_POST['edit']))              EditInstruments();
 
 
+
+
+
 function Validation($input){
     //Supprime les espaces debut et fin 
     $input = trim($input);
@@ -17,7 +20,7 @@ function Validation($input){
     //Convertit les balise html en string
     $input = htmlspecialchars($input);
     //Supprime les espaces center 
-    $input = preg_replace('/\s+/', ' ', $input);
+    $input = preg_replace('/\s+/','', $input);
     return $input;
 }
 
@@ -25,41 +28,47 @@ function Signup(){
     global $connection;
     $email = mysqli_real_escape_string($connection,$_POST['loginEmail']);
     $password = mysqli_real_escape_string($connection,$_POST['loginPassword']);
-    $sql ="SELECT * from admins where email = '$email' and password = '$password'";
-    $res = mysqli_query($connection,$sql);
-    if (mysqli_num_rows($res) === 1) {
-        $row = mysqli_fetch_assoc($res);
-        if ($row['email'] === $email && $row['password'] === $password) {
-            $_SESSION['user_name'] = $row['nom'].' '.$row['prenom'];
-            $_SESSION['id'] = $row['id'];
-            $_SESSION['image'] = $row['image'];
-            $_SESSION['online'] = 'on';
-            header("Location: index.php");
-        }
-    }else{
-        $_SESSION['erreur'] = "Admin n'est existe pas de la base donner";
+    if(empty($email) || empty($password)){
+        $_SESSION['erreur'] = "All is required !!!";
         header("Location: login.php");
+    }else{
+        $sql ="SELECT * from admins where email = '$email' and password = '$password'";
+        $res = mysqli_query($connection,$sql);
+        if (mysqli_num_rows($res) === 1) {
+            $row = mysqli_fetch_assoc($res);
+            if ($row['email'] === $email && $row['password'] === $password) {
+                $_SESSION['user_name'] = $row['nom'].' '.$row['prenom'];
+                $_SESSION['id'] = $row['id'];
+                $_SESSION['image'] = $row['image'];
+                $_SESSION['online'] = 'on';
+                header("Location: index.php");
+            }
+        }else{
+            $_SESSION['erreur'] = "Email does not exist in the database";
+            header("Location: login.php");
+        }
     }
+    
 
 }
 
 function register(){
     global $connection;
-    // if(empty($_POST['registerFirstName']) || empty($_POST['registerLastName']) || empty($_POST['registerEmail']) || empty($_POST['registerPassword']) ){
-    //     $_SESSION['erreur'] = "Erreur!!!!";
-    //     header('location: login.php');
-    // }else{
-        $nom = $_POST['registerFirstName'];
-        $prenom = $_POST['registerLastName'];
+    if( empty($_FILES["image"]["name"]) || empty($_POST['registerFirstName']) || empty($_POST['registerLastName']) || empty($_POST['registerDate']) || empty($_POST['registerCity']) || empty($_POST['registerEmail']) || empty($_POST['registerPassword']) ){
+        $_SESSION['erreur'] = "All is required !!!";
+        header('location: login.php');
+    }else{
+        $nom = Validation($_POST['registerFirstName']);
+        $prenom = Validation($_POST['registerLastName']);
             //uniqid pathinfo  +
         $image = uniqid($_FILES["image"]["name"]);
         $tempname = $_FILES["image"]["tmp_name"];
         $folder = "./assets/user/" . $image;
 
         $date = $_POST['registerDate'];
-        $city = $_POST['registerCity'];
-        $email = $_POST['registerEmail'];
-        $password = $_POST['registerPassword'];
+        $city = Validation($_POST['registerCity']);
+        $email = Validation($_POST['registerEmail']);
+        $password = Validation($_POST['registerPassword']);
         // $md5password = md5($password);
         $sql ="INSERT INTO `admins`(`nom`, `prenom`, `image`, `dateNaissance`, `ville`, `email`, `password`) 
         VALUES ('$nom','$prenom','$image','$date','$city','$email','$password')";
@@ -70,24 +79,26 @@ function register(){
         } else {
             echo "<h3>  Failed to upload image!</h3>";
         }
+        $_SESSION['message'] = "Register has been added successfully";
         header("Location: login.php");
-    // }
+    }
 }
 
 function users(){
     global $connection;
     $sql ="SELECT * from `admins` limit 4";
     $res =mysqli_query($connection,$sql);
-    while ($element = mysqli_fetch_assoc($res)){?>
+    while ($element = mysqli_fetch_assoc($res)){
+        ?>
         <div class="col-xl-3 col-sm-6 col-12 mb-4">
             <div class="card text-center">
-                <div class="card-header"><?php echo $element['nom']; ?></div>
+                <div class="card-header"><?php echo $element['nom']." ".$element['prenom']; ?></div>
                 <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
                     <img src="./assets/user/<?php echo $element['image']; ?>" style="width: 150px;" class="rounded-circle">
                 </div>
                 <div class="card-body">
                     <p class="card-text"><?php echo $element['email']; ?></p>
-                    <p class="card-text"><?php echo $element['ville']; ?></p>
+                    <p class="card-text"><i class="fas fa-map-pin text-danger"></i><?php echo $element['ville']; ?></p>
                 </div>
                 <div class="card-footer text-muted"><i class="fas fa-laptop on"></i>Connected</div>
             </div>
@@ -99,17 +110,48 @@ function users(){
 function profil(){
     global $connection;
     $id = $_POST['id'];
-    $nom = $_POST['upFirstName'];
-    $prenom = $_POST['upLastName'];
+    $nom = Validation($_POST['upFirstName']);
+    $prenom = Validation($_POST['upLastName']);
     $date = $_POST['upDate'];
-    $ville = $_POST['upCity'];
-    $password = $_POST['upPassword'];
-    $sql ="UPDATE `admins` SET `nom`='$nom',`prenom`='$prenom',`image`=''
-    ,`dateNaissance`='$date',`ville`='$ville',`password`='$password'
+    $ville = Validation($_POST['upCity']);
+    $password = Validation($_POST['upPassword']);
+    $image = $_FILES["upImg"]["name"];
+    if(empty($_FILES["upImg"]["name"])){
+    $sql ="UPDATE `admins` SET `nom`='$nom',`prenom`='$prenom',`dateNaissance`='$date',`ville`='$ville',`password`='$password'
     WHERE `id` = '$id'";
-    $res=mysqli_query($connection,$sql);
-    $_SESSION['user_name'] = $nom.' '.$prenom;
-    header("location: index.php");
+        mysqli_query($connection,$sql);
+        $_SESSION['message'] = "information user has been update successfully";
+        header("Location: profil.php");
+    }else{
+        $img="SELECT image from admins where id = '$id'";
+        $sul=mysqli_query($connection,$img);
+        $resul=mysqli_fetch_assoc($sul);
+        $image=$resul['image'];
+        $path="./assets/user/".$image;
+        unlink($path);
+        
+        $image = uniqid($_FILES["upImg"]["name"]);
+        $tempname = $_FILES["upImg"]["tmp_name"];
+        $folder = "./assets/user/" . $image;
+
+        if (move_uploaded_file($tempname, $folder)) {
+            echo "<h3>  Image uploaded successfully!</h3>";
+        } else {
+            echo "<h3>  Failed to upload image!</h3>";
+        }
+
+        $sql="UPDATE `admins` SET `image`='$image' WHERE id=$id";
+        mysqli_query($connection,$sql);
+        $_SESSION['message'] = "image user has been update successfully";        
+        header("Location: profil.php");
+
+    }
+    // $sql ="UPDATE `admins` SET `nom`='$nom',`prenom`='$prenom',`image`=''
+    // ,`dateNaissance`='$date',`ville`='$ville',`password`='$password'
+    // WHERE `id` = '$id'";
+    // $res=mysqli_query($connection,$sql);
+    // $_SESSION['user_name'] = $nom.' '.$prenom;
+    // header("location: index.php");
 }
 
 function Counts(){
@@ -146,9 +188,9 @@ function AddInstruments(){
     $basename = $image . "." .$fileType; //name.png
     $folder = "./assets/img/" . $basename;
 
-    $title = $_POST['title'];
-    $quantite = $_POST['quantite'];
-    $prix = $_POST['prix'];
+    $title = Validation($_POST['title']);
+    $quantite = Validation($_POST['quantite']);
+    $prix = Validation($_POST['prix']);
     $types = $_POST['types'];
     $sql="INSERT INTO `instruments`(`image`, `title`, `quantite`, `prix`, `id_type`) VALUES ('$basename','$title','$quantite','$prix','$types')";
     mysqli_query($connection,$sql);
@@ -158,13 +200,14 @@ function AddInstruments(){
     } else {
         echo "<h3>  Failed to upload image!</h3>";
     }
+    $_SESSION['message'] = "Instrument has been added successfully";
     header("Location: instruments.php");
 }
 
 function DisplayInstruments(){
     global $connection;
     $nbr=1;
-    $sql ="SELECT ins.* ,ty.title as nameType FROM instruments as ins INNER JOIN types as ty ON ins.id_type = ty.id";
+    $sql ="SELECT ins.* ,ty.title as nameType ,ty.id as idType  FROM instruments as ins INNER JOIN types as ty ON ins.id_type = ty.id";
     $res = mysqli_query($connection,$sql);
     while($element = mysqli_fetch_assoc($res)){?>
     
@@ -182,7 +225,7 @@ function DisplayInstruments(){
                 <p class="fw-normal mb-1" data="<?php echo $element['title'];?>" id="title"><?php echo $element['title'];?></p>
             </td>
             <td>
-                <span class="badge badge-success rounded-pill d-inline" data="<?php echo $element['nameType'];?>"><?php echo $element['nameType'];?></span>
+                <span class="badge badge-success rounded-pill d-inline" dataNameTypes="<?php echo $element['nameType'];?>" data="<?php echo $element['idType'];?>"><?php echo $element['nameType'];?></span>
             </td>
             <td>
                 <span data="<?php echo $element['quantite'];?>"><?php echo $element['quantite'];?></span>
@@ -214,11 +257,11 @@ function DeleteInstruments(){
         //select path+unlink 
         $sql="DELETE FROM `instruments` WHERE id=$id";
         mysqli_query($connection,$sql);
-        $_SESSION['msg']="Delete instrument";
+        $_SESSION['message'] = "Instrument has been delete successfully";
         header("Location: instruments.php");
         
     }else{
-        $_SESSION['erreur']="";
+        $_SESSION['error'] = "Instrument not update !!!";
         header("Location: instruments.php");
     }
 }
@@ -227,13 +270,14 @@ function EditInstruments(){
     global $connection;
     $id = $_POST['id'];
     $image = $_FILES["image"]["name"];
-    $title = $_POST['title'];
-    $quantite = $_POST['quantite'];
-    $prix = $_POST['prix'];
+    $title = Validation($_POST['title']);
+    $quantite = Validation($_POST['quantite']);
+    $prix = Validation($_POST['prix']);
     $types = $_POST['types'];
     if(empty($image)){
-        $sql="UPDATE `instruments` SET `title`='$title',`quantite`='$quantite',`prix`='$prix',`id_type`='$types' WHERE id=$id";
+        $sql="UPDATE `instruments` SET `title`='$title',`id_type`='$types' WHERE id=$id";
         mysqli_query($connection,$sql);
+        $_SESSION['message'] = "Instrument has been update successfully";
         header("Location: instruments.php");
     }else{
         $img="SELECT image from instruments where id = $id";
@@ -255,9 +299,7 @@ function EditInstruments(){
 
         $sql="UPDATE `instruments` SET `image`='$image' WHERE id=$id";
         mysqli_query($connection,$sql);
-
-
-        
+        $_SESSION['message'] = "Instrument has been update successfully";
         header("Location: instruments.php");
 
     }

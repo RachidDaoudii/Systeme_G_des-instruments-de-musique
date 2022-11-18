@@ -1,3 +1,40 @@
+$(document).ready(function(){
+  $("#registerEmail").blur(function(){
+    var email = $(this).val();
+    if(email == ""){
+      $("#msgsql").fadeOut();
+    }else{
+      $.ajax({
+        url: "email.php",
+        method: "POST",
+        data: {
+          email
+        },
+        success: function(data){
+          $("#msgsql").fadeIn().html(data);
+        }
+      });
+    }
+  });
+  
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (() => {
     'use strict';
@@ -20,22 +57,20 @@ function returnInfo(id){
   // let image= document.getElementById(id).children[0].children[0].children[1].getAttribute('data');
   let title= document.getElementById(id).children[2].children[0].getAttribute('data');
   let types= document.getElementById(id).children[3].children[0].getAttribute('data');
+  let Nametypes= document.getElementById(id).children[3].children[0].getAttribute('dataNameTypes');
   let quantite= document.getElementById(id).children[4].children[0].getAttribute('data');
   let prix= document.getElementById(id).children[5].children[0].getAttribute('data');
   // document.querySelector('#imagemodel').src = image;
   document.querySelector('#titlemodel').value = title;
-  console.log(id)
-  // document.querySelector('#typemodel').value = types;
   document.querySelector('#Quantitemodel').value = quantite;
   document.querySelector('#Prixmodel').value = prix;
+  document.querySelector('#typemodel').value = types;
 
   document.querySelector('#viewTitle').innerText=title;
-  document.querySelector('#viewTypes').innerText=types;
+  document.querySelector('#viewTypes').innerText=Nametypes;
   document.querySelector('#viewQuantite').innerText=quantite;
   document.querySelector('#viewPrix').innerText=prix;
-
-
-
+  
   document.querySelector('#idmodel').value = id;
 }
 
@@ -56,3 +91,6 @@ else offLine();
 
 window.addEventListener("online",onLine);
 window.addEventListener("offline",offLine);
+
+
+

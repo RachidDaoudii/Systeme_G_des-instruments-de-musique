@@ -4,7 +4,7 @@
     include('scripts.php');
     include('sidebar.php'); 
     include('navbar.php');
-    if(!isset($_SESSION["user_name"]) && !isset($_SESSION['id'])){
+    if(!isset($_SESSION["user_name"]) || !isset($_SESSION['id'])){
 		header("location: login.php");
 		exit;
 	}
@@ -14,7 +14,20 @@
     <main>
         <div class="container pt-4">
             <div class="d-flex justify-content-end">
-            <button class="btn btn-primary" type="button" data-mdb-toggle="modal" data-mdb-target="#exampleModal"><i class="fas fa-cart-plus"></i></button>
+                <button class="btn btn-primary" type="button" data-mdb-toggle="modal" data-mdb-target="#exampleModal"><i class="fas fa-cart-plus"></i></button>
+            </div>
+            <!-- session -->
+            <div class="d-flex justify-content-center">
+                <?php if(isset($_SESSION['message'])):  ?>
+                    <div class="alert alert-success alert-dismissible fade show w-50">
+                        <strong>successfully!</strong>
+                        <?php 
+                            echo $_SESSION['message']; 
+                            unset($_SESSION['message']);
+                        ?>
+                        <button type="button" class="btn-close" data-mdb-dismiss="alert"></span>
+                    </div>
+                <?php endif ?>
             </div>
             <section>
                 <div class="table-responsive col-lg-12">
@@ -67,8 +80,12 @@
                     </div>
                         <input type="hidden" id="idmodel" name="id">
                     <div class="form-outline mb-4">
-                        <select name="types" id="typemodel" class="form-control">
+                        <!-- <select name="types" id="typemodel" class="form-control">
                             <option value="">Types</option>
+                            
+                        </select> -->
+                        <select  name="types" id="typemodel" class="form-select" aria-label="Filter select">
+                            <option selected>Types</option>
                             <?php category();?>
                         </select>
                     </div>

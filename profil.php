@@ -4,7 +4,7 @@
     include('scripts.php');
     include('sidebar.php'); 
     include('navbar.php');
-    if(!isset($_SESSION["user_name"]) && !isset($_SESSION['id'])){
+    if(!isset($_SESSION["user_name"]) || !isset($_SESSION['id'])){
 		header("location: login.php");
 		exit;
 	}
@@ -13,20 +13,35 @@
     <!--Main layout-->
     <main style="margin-top: 58px">
         <div class="container pt-4">
-            
+            <!-- session -->
+            <div class="d-flex justify-content-center">
+                <?php if(isset($_SESSION['message'])):  ?>
+                    <div class="alert alert-success alert-dismissible fade show w-50">
+                        <strong>successfully!</strong>
+                        <?php 
+                            echo $_SESSION['message']; 
+                            unset($_SESSION['message']);
+                        ?>
+                        <button type="button" class="btn-close" data-mdb-dismiss="alert"></span>
+                    </div>
+                <?php endif ?>
+            </div>
             <?php 
             $id = $_SESSION['id'];
             $user = infoUser($id)
             ?>
-            <form action="scripts.php" method="POST" class="row g-3 auto pt-3 needs-validation" novalidate>
+            <form action="scripts.php" method="POST" enctype="multipart/form-data" class="row g-3 auto pt-3 needs-validation" novalidate>
                 <div class="d-flex justify-content-center  mb-4">
                     <a href="#"><img class="rounded-circle" src="./assets/user/<?php echo $user['image']?>" alt=""  height="200"></a>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <div class="btn btn-primary btn-rounded mb-4">
-                        <label class="form-label text-white m-1" for="customFile1">Choose image</label>
-                        <input type="file"name="upImg" accept="image/png, image/jpeg" class="form-control d-none" id="customFile1"/>
+                <div class="form-outline mb-4">
+                    <input type="file" class="form-control form-control-sm" name="upImg" id="imageuser"  />
                     </div>
+                    <!-- <div class="btn btn-primary btn-rounded mb-4">
+                        <label class="form-label text-white m-1" for="customFile1">Choose image</label>
+                        <input type="file" name="upImg" class="form-control d-none" id="customFile1"/>
+                    </div> -->
                 </div>
                 <input type="hidden" name="id" value="<?php echo $_SESSION['id'];?>">
                 <div class="col-md-4">
@@ -67,7 +82,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-outline">
-                    <input type="password" class="form-control" id="validationCustom02" required />
+                    <input type="password" class="form-control" id="validationCustom02" />
                     <label for="validationCustom02" type="password" class="form-label">Repeat Password</label>
                     </div>
                 </div>
@@ -77,6 +92,8 @@
             </form>
         </div>
     </main>
+
+    
     <!--Main layout-->
 <?php 
 include('footer.php')
