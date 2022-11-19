@@ -7,7 +7,8 @@ if(isset($_POST['updateProfil']))      profil();
 if(isset($_POST['save']))              AddInstruments();
 if(isset($_GET['id']))                 DeleteInstruments();
 if(isset($_POST['edit']))              EditInstruments();
-
+if(isset($_POST['savecategoty']))      AddCategoty();
+if(isset($_GET['idcategory']))    deleteCategoty();
 
 
 
@@ -162,9 +163,27 @@ function Counts(){
     echo $nbr[0];
 }
 
+function TotalPrix(){
+    global $connection;
+    $id = $_SESSION['id'];
+    $sql="SELECT sum(prix) FROM instruments where id_admin='$id'";
+    $res = mysqli_query($connection,$sql);
+    $nbr= mysqli_fetch_array($res);
+    echo $nbr[0];
+}
+
+function nbrTypes(){
+    global $connection;
+    $sql="SELECT count(title) FROM types";
+    $res = mysqli_query($connection,$sql);
+    $nbr= mysqli_fetch_array($res);
+    echo $nbr[0];
+}
+
 function CountsInstruments(){
     global $connection;
-    $sql="SELECT count(id) FROM instruments";
+    $id = $_SESSION['id'];
+    $sql="SELECT count(id) FROM instruments where id_admin='$id'";
     $res = mysqli_query($connection,$sql);
     $nbr= mysqli_fetch_array($res);
     echo $nbr[0];
@@ -192,7 +211,8 @@ function AddInstruments(){
     $quantite = Validation($_POST['quantite']);
     $prix = Validation($_POST['prix']);
     $types = $_POST['types'];
-    $sql="INSERT INTO `instruments`(`image`, `title`, `quantite`, `prix`, `id_type`) VALUES ('$basename','$title','$quantite','$prix','$types')";
+    $id = $_SESSION['id'];
+    $sql="INSERT INTO `instruments`(`image`, `title`, `quantite`, `prix`, `id_type`,`id_admin`) VALUES ('$basename','$title','$quantite','$prix','$types','$id')";
     mysqli_query($connection,$sql);
     // Now let's move the uploaded image into the folder: image
     if (move_uploaded_file($_FILES["image"]["tmp_name"], $folder)) {
@@ -207,7 +227,8 @@ function AddInstruments(){
 function DisplayInstruments(){
     global $connection;
     $nbr=1;
-    $sql ="SELECT ins.* ,ty.title as nameType ,ty.id as idType  FROM instruments as ins INNER JOIN types as ty ON ins.id_type = ty.id";
+    $id = $_SESSION['id'];
+    $sql ="SELECT ins.* ,ty.title as nameType ,ty.id as idType  FROM instruments as ins INNER JOIN types as ty ON ins.id_type = ty.id where ins.id_admin = '$id'";
     $res = mysqli_query($connection,$sql);
     while($element = mysqli_fetch_assoc($res)){?>
     
@@ -324,6 +345,49 @@ function infoUser($id){
     return $element;
 }
 
+
+function categoty(){
+    global $connection;
+    $nbr=1;
+    $sql="SELECT * FROM types";
+    $res = mysqli_query($connection,$sql);
+    while($element= mysqli_fetch_assoc($res)){?>
+        <tr>
+            <td>
+            <?php echo $nbr;?>
+            </td>
+            <td>
+                <p class="fw-normal mb-1"><?php echo $element['title']?></p>
+            </td>
+            <td>
+                <button type="button" class="btn btn-link btn-sm btn-rounded" name="deletecategoty" onclick="location.href='scripts.php?idcategory=<?php echo $element['id']?>'" ><i class="fas fa-trash"></i></button>
+            </td>
+        </tr>
+    <?php
+    $nbr++;
+    }  
+}
+
+
+function  AddCategoty(){
+    global $connection;
+    $titleCategory=$_POST['titleCategory'];
+    $sql="INSERT INTO `types`(`title`) VALUES ('$titleCategory')";
+    mysqli_query($connection,$sql);
+    $_SESSION['message'] = "Category has been added successfully";
+    header("Location: category.php");
+
+}
+
+function  deleteCategoty(){
+    global $connection;
+    $id=$_GET['idcategory'];
+    $sql="DELETE FROM `types` WHERE id='$id'";
+    mysqli_query($connection,$sql);
+    $_SESSION['message'] = " Delete Category has been successfully";
+    header("Location: category.php");
+
+}
 
 
 

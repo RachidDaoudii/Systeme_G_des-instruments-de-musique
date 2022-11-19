@@ -14,7 +14,7 @@
     <main>
         <div class="container pt-4">
             <div class="d-flex justify-content-end">
-                <button class="btn btn-primary" type="button" data-mdb-toggle="modal" data-mdb-target="#exampleModal"><i class="fas fa-cart-plus"></i></button>
+                <button id="btnAddInstruments" class="btn btn-primary" onclick="" type="button" data-mdb-toggle="modal" data-mdb-target="#exampleModal"><i class="fas fa-cart-plus"></i></button>
             </div>
             <!-- session -->
             <div class="d-flex justify-content-center">
@@ -58,40 +58,40 @@
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add Instruments</h5>
+                <h5 class="modal-title" id="TitleModal">Add Instruments</h5>
                 <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="scripts.php" method="POST" enctype="multipart/form-data">
-                    <div class="form-outline mb-4">
-                    <input type="file" class="form-control" name="image" id="imagemodel"  />
+                <form action="scripts.php" method="POST" enctype="multipart/form-data" data-parsley-validate>
+                    <div class="mb-4">
+                    <input type="file" class="form-control" name="image" id="imagemodel" />
                     </div>
-                    <div class="form-outline mb-4">
-                        <input type="text" class="form-control" name="title" id="titlemodel"  />
+                    <div class="mb-4">
                         <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control" name="title" id="titlemodel" required />
                     </div>
-                    <div class="form-outline mb-4">
-                        <input type="text" class="form-control" name="quantite" id="Quantitemodel"  />
+                    <div class="mb-4">
                         <label for="Quantite" class="form-label">Quantite</label>
+                        <input type="number" class="form-control" name="quantite" id="Quantitemodel" required />
                     </div>
-                    <div class="form-outline mb-4">
-                        <input type="text" class="form-control" id="Prixmodel" name="prix"  />
+                    <div class="mb-4">
                         <label for="Prix" class="form-label">Prix</label>
+                        <input type="number" class="form-control" id="Prixmodel" name="prix" required />
                     </div>
-                        <input type="hidden" id="idmodel" name="id">
-                    <div class="form-outline mb-4">
+                        <input type="hidden" id="idmodel" name="id" value="">
+                    <div class="mb-4">
                         <!-- <select name="types" id="typemodel" class="form-control">
                             <option value="">Types</option>
                             
                         </select> -->
-                        <select  name="types" id="typemodel" class="form-select" aria-label="Filter select">
+                        <select  name="types" id="typemodel" class="form-select" aria-label="Filter select" required>
                             <option selected>Types</option>
                             <?php category();?>
                         </select>
                     </div>
                     <div class="modal-footer">
                         <div class="btn btn-secondary" data-mdb-dismiss="modal">Close</div>
-                        <button type="submit" class="btn btn-warning" name="edit">Edit</button>
+                        <button type="submit" id="editInst" class="btn btn-warning" name="edit">Edit</button>
                         <button type="submit" class="btn btn-primary" name="save">Save</button>
                     </div>
                 </form>
@@ -113,7 +113,7 @@
             </div>
             <div class="modal-body">
                 <div class="form-outline mb-4 d-flex justify-content-center">
-                <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt="" style="width: 100px;" class="rounded-circle"/>
+                <img src="" alt="" id="viewImage" style="width: 100px;" class="rounded-circle"/>
                 </div>
                 <div class="form-outline mb-4 d-flex justify-content-center">
                     <label for="title" class="form-label">Title :</label>
@@ -137,7 +137,6 @@
         </div>
         </div>
     <!-- Modal -->
-
 <?php 
 include('footer.php')
 ?>

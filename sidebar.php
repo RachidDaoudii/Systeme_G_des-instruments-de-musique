@@ -24,13 +24,18 @@
                 href="profil.php"
                 class="list-group-item list-group-item-action py-2 ripple"
                 >
-                <i class="fas fa-chart-area fa-fw me-3"></i
+                <i class="fas fa-user fa-fw me-3"></i
                     ><span>profile</span>
                 </a>
                 <a
                 href="instruments.php"
                 class="list-group-item list-group-item-action py-2 ripple"
-                ><i class="fas fa-users fa-fw me-3"></i><span>Instruments</span></a
+                ><i class="fas fa-guitar fa-fw me-3"></i><span>Instruments</span></a
+                >
+                <a
+                href="category.php"
+                class="list-group-item list-group-item-action py-2 ripple"
+                ><i class="fas fa-wrench fa-fw me-3"></i><span>Category</span></a
                 >
             </div>
         </div>

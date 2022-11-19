@@ -12,7 +12,7 @@
         class="navbar navbar-expand-lg navbar-light bg-white fixed-top"
         >
         <!-- Container wrapper -->
-        <div class="container-fluid">
+        <div class="container-fluid nav_bar">
         <!-- Toggle button -->
         <button
                 class="navbar-toggler"

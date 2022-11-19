@@ -19,7 +19,11 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.css"
     rel="stylesheet"
     />
-    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- BEGIN parsley css-->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/guillaumepotier/Parsley.js@2.9.2/doc/assets/docs.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/guillaumepotier/Parsley.js@2.9.2/src/parsley.css">
+    <!-- END parsley css-->
+    <link rel="stylesheet" href="./assets/css/style.css">
     <title>Musique</title>
 </head>
 <body>

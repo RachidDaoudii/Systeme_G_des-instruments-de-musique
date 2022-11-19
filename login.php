@@ -2,6 +2,7 @@
     include('header.php');
     include('scripts.php');
     include('database.php');
+    include('config.php');
 ?>
     <div class="container">
         <div class="w-50 mx-auto">
@@ -49,9 +50,11 @@
                                 <i class="fab fa-facebook-f"></i>
                                 </button>
 
-                                <button type="button" class="btn btn-link btn-floating mx-1">
-                                <i class="fab fa-google"></i>
-                                </button>
+                                <div type="button" class="btn btn-link btn-floating mx-1">
+                                <a href="https://accounts.google.com/o/oauth2/v2/auth?scope=email&access_type=online&response_type=code&redirect_uri=<?php urldecode('http://localhost/Systeme_G_des-instruments-de-musique/indexsdfds.php')?>&client_id=<?= GOOGLE_ID ?>">
+                                    <i class="fab fa-google"></i>
+                                </a>
+                                </div>
 
                                 <button type="button" class="btn btn-link btn-floating mx-1">
                                 <i class="fab fa-twitter"></i>
@@ -63,12 +66,12 @@
                             </div>
                             <p class="text-center">or:</p>
                             <!-- Email input -->
-                            <div class=" mb-4">
+                            <div class="mb-3">
                                 <label class="form-label" for="loginEmail">Email</label>
                                 <input type="text" id="loginEmail" name="loginEmail" class="form-control" placeholder="Email" required  />
                             </div>
                             <!-- Password input -->
-                            <div class="mb-4">
+                            <div class="mb-3">
                                 <label class="form-label" for="loginPassword">Password</label>
                                 <input type="password" id="loginPassword" name="loginPassword" placeholder="password" class="form-control" required />
                             </div>
