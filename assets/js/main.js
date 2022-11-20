@@ -1,3 +1,9 @@
+// let hg=document.querySelector("#btnAddInstruments");
+// hg.addEventListener('click',function(){
+//   console.log('lkhglkdf')
+// })
+
+
 $(document).ready(function(){
   $("#registerEmail").keyup(function(){
     var email = $(this).val();
@@ -18,33 +24,56 @@ $(document).ready(function(){
   });
 });
 
+function ButtonAdd(){
+  document.getElementById('form').reset();
+  document.querySelector('#TitleModal').innerHTML="Add Instruments";
+  document.querySelector('#editInst').style.display="none";
+  document.querySelector('#saveInstrument').style.display="block";
+}
+
+function ButtonUpdate(){
+  document.querySelector('#TitleModal').innerHTML="Update Instruments";
+  document.querySelector('#saveInstrument').style.display="none";
+  document.querySelector('#editInst').style.display="block";
+
+}
+
 // Example starter JavaScript for disabling form submissions if there are invalid fields
-(() => {
-    'use strict';
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    const forms = document.querySelectorAll('.needs-validation');
-    // Loop over them and prevent submission
-    Array.prototype.slice.call(forms).forEach((form) => {
-      form.addEventListener('submit', (event) => {
-        if (!form.checkValidity()) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    });
-})();
+// (() => {
+//     'use strict';
+//     // Fetch all the forms we want to apply custom Bootstrap validation styles to
+//     const forms = document.querySelectorAll('.needs-validation');
+//     // Loop over them and prevent submission
+//     Array.prototype.slice.call(forms).forEach((form) => {
+//       form.addEventListener('submit', (event) => {
+//         if (!form.checkValidity()) {
+//           event.preventDefault();
+//           event.stopPropagation();
+//         }
+//         form.classList.add('was-validated');
+//       }, false);
+//     });
+// })();
 
 function returnInfo(id){
-  
+  let nameImg=document.getElementById(id).children[0].getAttribute('img')
   let image= document.getElementById(id).children[1].children[0].children[0].src;
   let title= document.getElementById(id).children[2].children[0].getAttribute('data');
   let types= document.getElementById(id).children[3].children[0].getAttribute('data');
   let Nametypes= document.getElementById(id).children[3].children[0].getAttribute('dataNameTypes');
   let quantite= document.getElementById(id).children[4].children[0].getAttribute('data');
   let prix= document.getElementById(id).children[5].children[0].getAttribute('data');
-  // console.log(image)
-  // document.querySelector('#imagemodel').value = image;
+
+  //return image
+  const myFile = new File([nameImg],nameImg, {
+    type: 'text/plain',
+    lastModified: new Date(),
+  });
+  const dataTransfer = new DataTransfer();
+  dataTransfer.items.add(myFile);//your file(s) reference(s)
+  document.querySelector('#imagemodel').files = dataTransfer.files;
+
+  // document.querySelector('#imagemodel').value = nameImg;
   document.querySelector('#titlemodel').value = title;
   document.querySelector('#Quantitemodel').value = quantite;
   document.querySelector('#Prixmodel').value = prix;
@@ -78,9 +107,3 @@ function returnInfo(id){
 // window.addEventListener("offline",offLine);
 
 
-// function ButtonAdd(){
-  // console.log("kjhkj")
-  // document.getElementById('TitleModal').innerHTML="shjgjhg";
-  // document.getElementById('editInst').style.display="none";
-
-// }

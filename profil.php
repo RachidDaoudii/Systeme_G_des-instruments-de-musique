@@ -9,7 +9,6 @@
 		exit;
 	}
 ?>
-
     <!--Main layout-->
     <main style="margin-top: 58px">
         <div class="container pt-4">
@@ -38,10 +37,6 @@
                 <div class="form-outline mb-4">
                     <input type="file" class="form-control form-control-sm" name="upImg" id="imageuser"  />
                     </div>
-                    <!-- <div class="btn btn-primary btn-rounded mb-4">
-                        <label class="form-label text-white m-1" for="customFile1">Choose image</label>
-                        <input type="file" name="upImg" class="form-control d-none" id="customFile1"/>
-                    </div> -->
                 </div>
                 <input type="hidden" name="id" value="<?php echo $_SESSION['id'];?>">
                 <div class="col-md-4">
@@ -76,25 +71,22 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-outline">
-                    <input type="password" class="form-control" name="upPassword" required value="<?php echo $user['password']?>"/>
+                    <input type="password" class="form-control" name="upPassword" id="profilPassword" required value="<?php echo $user['password']?> " data-equalto="#profilRepeatPassword" data-parsley-trigger="keyup"/>
                     <label for="validationCustom02" type="password" class="form-label">Password</label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-outline">
-                    <input type="password" class="form-control" id="validationCustom02" />
+                    <input type="password" class="form-control" id="profilRepeatPassword" data-equalto="#profilPassword" required data-parsley-trigger="keyup" />
                     <label for="validationCustom02" type="password" class="form-label">Repeat Password</label>
                     </div>
                 </div>
-                <div class="col-12">
+                <div class="col-12 mb-5">
                     <button class="btn btn-primary" type="submit" name="updateProfil">Save</button>
                 </div>
             </form>
         </div>
     </main>
-
-    
-    <!--Main layout-->
 <?php 
 include('footer.php')
 ?>

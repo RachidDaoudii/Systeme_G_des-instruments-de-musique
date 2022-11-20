@@ -65,7 +65,7 @@
                             </div>
                             <p class="text-center">or:</p>
                             <!-- Email input -->
-                            <div class="mb-3">
+                            <div class="mb-1">
                                 <label class="form-label" for="loginEmail">Email</label>
                                 <input type="email" id="loginEmail" name="loginEmail" class="form-control" placeholder="Email" required  />
                             </div>
@@ -80,7 +80,7 @@
                         </form>
                     </div>
                     <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
-                        <form id="form_register" action="scripts.php" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
+                        <form id="form_register" action="scripts.php" method="POST" data-parsley-validate novalidate enctype="multipart/form-data">
                             <div class="text-center mb-3">
                                 <p>Sign up with:</p>
                                 <button type="button" class="btn btn-link btn-floating mx-1">
@@ -100,55 +100,54 @@
                             <p class="text-center">or:</p>
 
                             <!-- img input -->
-                            <div class="form-outline mb-4">
+                            <div class="mb-1">
                                 <input type="file" id="registerName" name="image" class="form-control" required />
-                                <!-- <label class="form-label" for="registerName">image</label> -->
                             </div>
 
                             <!-- Name input -->
-                            <div class="form-outline mb-4">
-                                <input type="text" id="registerName" name="registerFirstName" class="form-control" required />
+                            <div class="mb-1">
                                 <label class="form-label" for="registerName">first name</label>
+                                <input type="text" id="registerName" name="registerFirstName" class="form-control" required data-parsley-trigger="keyup"/>
                             </div>
 
-                            <!-- Username input -->
-                            <div class="form-outline mb-4">
-                                <input type="text" id="registerUsername" name="registerLastName" class="form-control" required/>
+                            <!-- Name input -->
+                            <div class="mb-1">
                                 <label class="form-label" for="registerUsername">last name</label>
+                                <input type="text" id="registerUsername" name="registerLastName" class="form-control" required data-parsley-trigger="keyup"/>
                             </div>
 
                             <!-- date input -->
-                            <div class="form-outline mb-4">
-                                <input type="date" id="registerUsername" name="registerDate" class="form-control" required/>
+                            <div class="mb-1">
                                 <label class="form-label" for="registerUsername">date of birth</label>
+                                <input type="date" id="registerUsername" name="registerDate" class="form-control" required data-parsley-trigger="keyup"/>
                             </div>
 
                             <!-- city input -->
-                            <div class="form-outline mb-4">
-                                <input type="text" id="registerUsername" name="registerCity" class="form-control" required/>
+                            <div class="mb-1">
                                 <label class="form-label" for="registerUsername">city</label>
+                                <input type="text" id="registerUsername" name="registerCity" class="form-control" required data-parsley-trigger="keyup"/>
                             </div>
 
                             <!-- Email input -->
-                            <div class="form-outline mb-4">
-                                <input type="email" id="registerEmail" name="registerEmail" class="form-control" required />
-                                <span id="msgsql"></span>
+                            <div class="mb-1">
                                 <label class="form-label" for="registerEmail">Email</label>
+                                <input type="email" id="registerEmail" name="registerEmail" class="form-control" required data-parsley-trigger="keyup"/>
+                                <span id="msgsql" ></span>
                             </div>
 
                             <!-- Password input -->
-                            <div class="form-outline mb-4">
-                                <input type="password" id="registerPassword" name="registerPassword" class="form-control" required />
+                            <div class="mb-1">
                                 <label class="form-label" for="registerPassword">Password</label>
+                                <input type="password" id="registerPassword" name="registerPassword" class="form-control" data-equalto="#registerRepeatPassword" data-parsley-trigger="keyup" required />
                             </div>
 
                             <!-- Repeat Password input -->
-                            <div class="form-outline mb-4">
-                                <input type="password" id="registerRepeatPassword" class="form-control" required />
+                            <div class="mb-2">
                                 <label class="form-label" for="registerRepeatPassword">Repeat password</label>
+                                <input type="password" id="registerRepeatPassword" class="form-control" data-equalto="#registerPassword" data-parsley-trigger="keyup" required />
                             </div>
                             <!-- Checkbox -->
-                            <div class="form-check d-flex justify-content-center mb-4">
+                            <div class="form-check d-flex justify-content-center mb-2">
                                 <input class="form-check-input me-2" type="checkbox" value="" id="registerCheck" checked
                                 aria-describedby="registerCheckHelpText" />
                                 <label class="form-check-label" for="registerCheck">
@@ -156,7 +155,7 @@
                                 </label>
                             </div>
                             <!-- Submit button -->
-                            <button type="submit" class="btn btn-primary btn-block mb-3" name="register">Sign in</button>
+                            <button type="submit" class="btn btn-primary btn-block mb-5" name="register">Sign in</button>
                         </form>
                     </div>
                 </div>

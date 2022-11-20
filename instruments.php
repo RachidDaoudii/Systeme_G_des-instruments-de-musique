@@ -14,7 +14,7 @@
     <main>
         <div class="container pt-4">
             <div class="d-flex justify-content-end">
-                <button id="btnAddInstruments" class="btn btn-primary" onclick="" type="button" data-mdb-toggle="modal" data-mdb-target="#exampleModal"><i class="fas fa-cart-plus"></i></button>
+                <button id="btnAddInstruments" class="btn btn-primary" onclick='ButtonAdd()' type="button" data-mdb-toggle="modal" data-mdb-target="#exampleModal"><i class="fas fa-cart-plus"></i></button>
             </div>
             <!-- session -->
             <div class="d-flex justify-content-center">
@@ -62,7 +62,7 @@
                 <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="scripts.php" method="POST" enctype="multipart/form-data" data-parsley-validate>
+                <form action="scripts.php" method="POST" enctype="multipart/form-data" id="form" data-parsley-validate>
                     <div class="mb-4">
                     <input type="file" class="form-control" name="image" id="imagemodel" />
                     </div>
@@ -80,10 +80,6 @@
                     </div>
                         <input type="hidden" id="idmodel" name="id" value="">
                     <div class="mb-4">
-                        <!-- <select name="types" id="typemodel" class="form-control">
-                            <option value="">Types</option>
-                            
-                        </select> -->
                         <select  name="types" id="typemodel" class="form-select" aria-label="Filter select" required>
                             <option selected>Types</option>
                             <?php category();?>
@@ -92,7 +88,7 @@
                     <div class="modal-footer">
                         <div class="btn btn-secondary" data-mdb-dismiss="modal">Close</div>
                         <button type="submit" id="editInst" class="btn btn-warning" name="edit">Edit</button>
-                        <button type="submit" class="btn btn-primary" name="save">Save</button>
+                        <button type="submit" id="saveInstrument" class="btn btn-primary" name="save">Save</button>
                     </div>
                 </form>
             </div>
@@ -103,7 +99,7 @@
     <!-- Modal -->
 
 
-    <!-- Modal -->
+    <!-- view -->
     <div class="modal fade" id="view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -113,7 +109,7 @@
             </div>
             <div class="modal-body">
                 <div class="form-outline mb-4 d-flex justify-content-center">
-                <img src="" alt="" id="viewImage" style="width: 100px;" class="rounded-circle"/>
+                <img src="" alt="" id="viewImage" style="width: 200px; border: 1px solid gray" class="rounded"/>
                 </div>
                 <div class="form-outline mb-4 d-flex justify-content-center">
                     <label for="title" class="form-label">Title :</label>

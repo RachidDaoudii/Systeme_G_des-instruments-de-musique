@@ -1,18 +1,22 @@
-<?php include('database.php'); 
-session_start();
+<?php 
+    //INCLUDE DATABASE FILE
+    include('database.php'); 
 
-if(isset($_POST['signup']))            Signup();
-if(isset($_POST['register']))          register();
-if(isset($_POST['updateProfil']))      profil();
-if(isset($_POST['save']))              AddInstruments();
-if(isset($_GET['id']))                 DeleteInstruments();
-if(isset($_POST['edit']))              EditInstruments();
-if(isset($_POST['savecategoty']))      AddCategoty();
-if(isset($_GET['idcategory']))    deleteCategoty();
+    //start session
+    session_start();
+
+    //routing
+    if(isset($_POST['signup']))            Signup();
+    if(isset($_POST['register']))          register();
+    if(isset($_POST['updateProfil']))      profil();
+    if(isset($_POST['save']))              AddInstruments();
+    if(isset($_GET['id']))                 DeleteInstruments();
+    if(isset($_POST['edit']))              EditInstruments();
+    if(isset($_POST['savecategoty']))      AddCategoty();
+    if(isset($_GET['idcategory']))         deleteCategoty();
 
 
-
-
+    //function validation input 
 function Validation($input){
     //Supprime les espaces debut et fin 
     $input = trim($input);
@@ -25,6 +29,7 @@ function Validation($input){
     return $input;
 }
 
+    //function signup user
 function Signup(){    
     global $connection;
     $email = mysqli_real_escape_string($connection,$_POST['loginEmail']);
@@ -45,20 +50,19 @@ function Signup(){
                 header("Location: index.php");
             }
         }else{
-            $_SESSION['erreur'] = "Email does not exist in the database";
+            $_SESSION['erreur'] = "user does not exist in the database";
             header("Location: login.php");
         }
     }
-    
-
 }
-
+    //function register user
 function register(){
     global $connection;
     if( empty($_FILES["image"]["name"]) || empty($_POST['registerFirstName']) || empty($_POST['registerLastName']) || empty($_POST['registerDate']) || empty($_POST['registerCity']) || empty($_POST['registerEmail']) || empty($_POST['registerPassword']) ){
         $_SESSION['erreur'] = "All is required !!!";
         header('location: login.php');
-    }else{
+    }
+    else{
         $nom = Validation($_POST['registerFirstName']);
         $prenom = Validation($_POST['registerLastName']);
             //uniqid pathinfo  +
@@ -71,20 +75,23 @@ function register(){
         $email = Validation($_POST['registerEmail']);
         $password = Validation($_POST['registerPassword']);
         // $md5password = md5($password);
-        $sql ="INSERT INTO `admins`(`nom`, `prenom`, `image`, `dateNaissance`, `ville`, `email`, `password`) 
-        VALUES ('$nom','$prenom','$image','$date','$city','$email','$password')";
-        mysqli_query($connection,$sql);
-        // Now let's move the uploaded image into the folder: image
-        if (move_uploaded_file($tempname, $folder)) {
-            echo "<h3>  Image uploaded successfully!</h3>";
-        } else {
-            echo "<h3>  Failed to upload image!</h3>";
-        }
-        $_SESSION['message'] = "Register has been added successfully";
-        header("Location: login.php");
+        $sql="SELECT email from admins where email ='$email'";
+        $checkEmail = mysqli_query($connection,$sql);
+        if(mysqli_num_rows($checkEmail) == 1){
+            $_SESSION['erreur']='Email exist in the database';
+            header("Location: login.php");
+        }else{
+            $sql ="INSERT INTO `admins`(`nom`, `prenom`, `image`, `dateNaissance`, `ville`, `email`, `password`) 
+            VALUES ('$nom','$prenom','$image','$date','$city','$email','$password')";
+            mysqli_query($connection,$sql);
+            // Now let's move the uploaded image into the folder: image
+            move_uploaded_file($tempname, $folder);
+            $_SESSION['message'] = "Register has been added successfully";
+            header("Location: login.php");
+        } 
     }
 }
-
+    //function afficher 4 user dans la base de donner
 function users(){
     global $connection;
     $sql ="SELECT * from `admins` limit 4";
@@ -107,7 +114,7 @@ function users(){
     <?php
     }
 }
-
+    //function modifier les information de profil 
 function profil(){
     global $connection;
     $id = $_POST['id'];
@@ -120,9 +127,9 @@ function profil(){
     if(empty($_FILES["upImg"]["name"])){
     $sql ="UPDATE `admins` SET `nom`='$nom',`prenom`='$prenom',`dateNaissance`='$date',`ville`='$ville',`password`='$password'
     WHERE `id` = '$id'";
-        mysqli_query($connection,$sql);
-        $_SESSION['message'] = "information user has been update successfully";
-        header("Location: profil.php");
+    mysqli_query($connection,$sql);
+    $_SESSION['message'] = "information user has been update successfully";
+    header("Location: profil.php");
     }else{
         $img="SELECT image from admins where id = '$id'";
         $sul=mysqli_query($connection,$img);
@@ -135,11 +142,7 @@ function profil(){
         $tempname = $_FILES["upImg"]["tmp_name"];
         $folder = "./assets/user/" . $image;
 
-        if (move_uploaded_file($tempname, $folder)) {
-            echo "<h3>  Image uploaded successfully!</h3>";
-        } else {
-            echo "<h3>  Failed to upload image!</h3>";
-        }
+        move_uploaded_file($tempname, $folder);
 
         $sql="UPDATE `admins` SET `image`='$image' WHERE id=$id";
         mysqli_query($connection,$sql);
@@ -147,14 +150,8 @@ function profil(){
         header("Location: profil.php");
 
     }
-    // $sql ="UPDATE `admins` SET `nom`='$nom',`prenom`='$prenom',`image`=''
-    // ,`dateNaissance`='$date',`ville`='$ville',`password`='$password'
-    // WHERE `id` = '$id'";
-    // $res=mysqli_query($connection,$sql);
-    // $_SESSION['user_name'] = $nom.' '.$prenom;
-    // header("location: index.php");
 }
-
+    //function return count nombre de user
 function Counts(){
     global $connection;
     $sql="SELECT count(id) FROM admins";
@@ -163,6 +160,7 @@ function Counts(){
     echo $nbr[0];
 }
 
+    //function return total prix des instruments par user
 function TotalPrix(){
     global $connection;
     $id = $_SESSION['id'];
@@ -172,6 +170,7 @@ function TotalPrix(){
     echo $nbr[0];
 }
 
+    //function return count category des instrument
 function nbrTypes(){
     global $connection;
     $sql="SELECT count(title) FROM types";
@@ -180,6 +179,7 @@ function nbrTypes(){
     echo $nbr[0];
 }
 
+    //function return count des instrument par user
 function CountsInstruments(){
     global $connection;
     $id = $_SESSION['id'];
@@ -189,6 +189,7 @@ function CountsInstruments(){
     echo $nbr[0];
 }
 
+    //function afficher category dans form type select
 function category(){
     global $connection;
     $sql="SELECT * from types";
@@ -199,6 +200,7 @@ function category(){
     }
 }
 
+    //function ajouter instrument
 function AddInstruments(){
     global $connection;
     $image = uniqid();//name image
@@ -215,15 +217,12 @@ function AddInstruments(){
     $sql="INSERT INTO `instruments`(`image`, `title`, `quantite`, `prix`, `id_type`,`id_admin`) VALUES ('$basename','$title','$quantite','$prix','$types','$id')";
     mysqli_query($connection,$sql);
     // Now let's move the uploaded image into the folder: image
-    if (move_uploaded_file($_FILES["image"]["tmp_name"], $folder)) {
-        echo "<h3>  Image uploaded successfully!</h3>";
-    } else {
-        echo "<h3>  Failed to upload image!</h3>";
-    }
+    move_uploaded_file($_FILES["image"]["tmp_name"], $folder);
     $_SESSION['message'] = "Instrument has been added successfully";
     header("Location: instruments.php");
 }
 
+    //function afficher instrument
 function DisplayInstruments(){
     global $connection;
     $nbr=1;
@@ -231,9 +230,8 @@ function DisplayInstruments(){
     $sql ="SELECT ins.* ,ty.title as nameType ,ty.id as idType  FROM instruments as ins INNER JOIN types as ty ON ins.id_type = ty.id where ins.id_admin = '$id'";
     $res = mysqli_query($connection,$sql);
     while($element = mysqli_fetch_assoc($res)){?>
-    
         <tr id="<?php echo $element['id'];?>">
-            <td>
+            <td img="<?php echo $element['image']; ?>">
                 <?php echo $nbr;?>
             </td>
             <td>
@@ -255,7 +253,7 @@ function DisplayInstruments(){
                 <span data="<?php echo $element['prix'];?>"><?php echo $element['prix'];?></span>
             </td>
             <td>
-                <button type="button" class="btn btn-link btn-sm btn-rounded" data-mdb-toggle="modal" data-mdb-target="#exampleModal" onclick="returnInfo(<?php echo $element['id'];?>)"><i class="far fa-edit"></i></button>
+                <button type="button" class="btn btn-link btn-sm btn-rounded" data-mdb-toggle="modal" data-mdb-target="#exampleModal" onclick="returnInfo(<?php echo $element['id'];?>);ButtonUpdate()"><i class="far fa-edit"></i></button>
                 <button type="button" class="btn btn-link btn-sm btn-rounded" name="delete" onclick="location.href='scripts.php?id=<?php echo $element['id']?>'"><i class="fas fa-trash"></i></button>
                 <button type="button" class="btn btn-link btn-sm btn-rounded" data-mdb-toggle="modal" data-mdb-target="#view" onclick="returnInfo(<?php echo $element['id'];?>)"><i class="far fa-eye"></i></button>
             </td>
@@ -265,7 +263,7 @@ function DisplayInstruments(){
     }
 }
 
-
+    //function supprimer instrument
 function DeleteInstruments(){
     global $connection;
     $id = $_GET['id'];
@@ -287,6 +285,7 @@ function DeleteInstruments(){
     }
 }
 
+    //function modifier instrument
 function EditInstruments(){
     global $connection;
     $id = $_POST['id'];
@@ -312,31 +311,16 @@ function EditInstruments(){
         $tempname = $_FILES["image"]["tmp_name"];
         $folder = "./assets/img/" . $image;
 
-        if (move_uploaded_file($tempname, $folder)) {
-            echo "<h3>  Image uploaded successfully!</h3>";
-        } else {
-            echo "<h3>  Failed to upload image!</h3>";
-        }
+        move_uploaded_file($tempname, $folder);
 
         $sql="UPDATE `instruments` SET `image`='$image' WHERE id=$id";
         mysqli_query($connection,$sql);
         $_SESSION['message'] = "Instrument has been update successfully";
         header("Location: instruments.php");
-
-    }
-    
-    
-    // if (move_uploaded_file($tempname, $folder)) {
-    //     echo "<h3>  Image uploaded successfully!</h3>";
-    // } else {
-    //     echo "<h3>  Failed to upload image!</h3>";
-    // }
-    // $_SESSION['msg']="Edit instrument";
-    // header("Location: instruments.php");
-        
+    }       
 }
 
-
+    //function return les information de user 
 function infoUser($id){
     global $connection;
     $sql="SELECT * FROM admins where id =$id";
@@ -345,7 +329,7 @@ function infoUser($id){
     return $element;
 }
 
-
+    //function afficher category
 function categoty(){
     global $connection;
     $nbr=1;
@@ -368,7 +352,7 @@ function categoty(){
     }  
 }
 
-
+    //function ajouter category
 function  AddCategoty(){
     global $connection;
     $titleCategory=$_POST['titleCategory'];
@@ -376,9 +360,9 @@ function  AddCategoty(){
     mysqli_query($connection,$sql);
     $_SESSION['message'] = "Category has been added successfully";
     header("Location: category.php");
-
 }
 
+    //function supprimer category
 function  deleteCategoty(){
     global $connection;
     $id=$_GET['idcategory'];
@@ -386,7 +370,6 @@ function  deleteCategoty(){
     mysqli_query($connection,$sql);
     $_SESSION['message'] = " Delete Category has been successfully";
     header("Location: category.php");
-
 }
 
 
