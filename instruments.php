@@ -13,7 +13,7 @@
     <!--Main layout-->
     <main>
         <div class="container pt-4">
-            <div class="d-flex justify-content-end">
+            <div class="d-flex justify-content-end mb-5">
                 <button id="btnAddInstruments" class="btn btn-primary" onclick='ButtonAdd()' type="button" data-mdb-toggle="modal" data-mdb-target="#exampleModal"><i class="fas fa-cart-plus"></i></button>
             </div>
             <!-- session -->
@@ -32,7 +32,7 @@
             <section>
                 <div class="table-responsive col-lg-12">
                     <table class="table align-middle mb-0 bg-white">
-                        <thead class="bg-light">
+                        <thead class="bg-primary text-light">
                             <tr>
                                 <th >#</th>
                                 <th >image</th>

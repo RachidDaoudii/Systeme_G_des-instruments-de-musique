@@ -101,7 +101,8 @@
 
                             <!-- img input -->
                             <div class="mb-1">
-                                <input type="file" id="registerName" name="image" class="form-control" required />
+                            <!-- <label class="form-label" for="registerName">image profil</label>
+                                <input type="file" id="registerName" name="image" class="form-control" required /> -->
                             </div>
 
                             <!-- Name input -->

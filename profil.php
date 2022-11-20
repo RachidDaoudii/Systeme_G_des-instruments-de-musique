@@ -12,6 +12,17 @@
     <!--Main layout-->
     <main style="margin-top: 58px">
         <div class="container pt-4">
+            <!-- session erreur -->
+            <?php if(isset($_SESSION['erreur'])):  ?>
+                    <div class="alert alert-danger alert-dismissible fade show">
+                        <strong>Erreur!</strong>
+                        <?php 
+                            echo $_SESSION['erreur']; 
+                            unset($_SESSION['erreur']);
+                        ?>
+                        <button type="button" class="btn-close" data-mdb-dismiss="alert"></span>
+                    </div>
+                <?php endif ?>
             <!-- session -->
             <div class="d-flex justify-content-center">
                 <?php if(isset($_SESSION['message'])):  ?>
@@ -77,7 +88,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-outline">
-                    <input type="password" class="form-control" id="profilRepeatPassword" data-equalto="#profilPassword" required data-parsley-trigger="keyup" />
+                    <input type="password" class="form-control" id="profilRepeatPassword" name="upRepeatPassword" data-equalto="#profilPassword" required data-parsley-trigger="keyup" />
                     <label for="validationCustom02" type="password" class="form-label">Repeat Password</label>
                     </div>
                 </div>

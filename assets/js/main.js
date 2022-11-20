@@ -65,13 +65,13 @@ function returnInfo(id){
   let prix= document.getElementById(id).children[5].children[0].getAttribute('data');
 
   //return image
-  const myFile = new File([nameImg],nameImg, {
-    type: 'text/plain',
-    lastModified: new Date(),
-  });
-  const dataTransfer = new DataTransfer();
-  dataTransfer.items.add(myFile);//your file(s) reference(s)
-  document.querySelector('#imagemodel').files = dataTransfer.files;
+  // const myFile = new File([nameImg],nameImg, {
+  //   type: 'text/plain',
+  //   lastModified: new Date(),
+  // });
+  // const dataTransfer = new DataTransfer();
+  // dataTransfer.items.add(myFile);//your file(s) reference(s)
+  // document.querySelector('#imagemodel').files = dataTransfer.files;
 
   // document.querySelector('#imagemodel').value = nameImg;
   document.querySelector('#titlemodel').value = title;

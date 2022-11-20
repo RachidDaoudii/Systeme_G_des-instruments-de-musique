@@ -108,10 +108,19 @@ function users(){
                     <p class="card-text"><?php echo $element['email']; ?></p>
                     <p class="card-text"><i class="fas fa-map-pin text-danger"></i><?php echo $element['ville']; ?></p>
                 </div>
-                <div class="card-footer text-muted"><i class="fas fa-laptop on"></i>Connected</div>
+                <?php
+                if($element['id'] == $_SESSION['id']){?>
+                    <div class="card-footer text-muted"><i class="fas fa-laptop text-success"></i>Connected</div>
+                <?php
+                }else{?>
+                    <div class="card-footer text-muted"><i class="fas fa-laptop text-danger"></i>Connected</div>
+                <?php
+                }
+                ?>
+                
             </div>
         </div>
-    <?php
+        <?php
     }
 }
     //function modifier les information de profil 
@@ -125,11 +134,16 @@ function profil(){
     $password = Validation($_POST['upPassword']);
     $image = $_FILES["upImg"]["name"];
     if(empty($_FILES["upImg"]["name"])){
-    $sql ="UPDATE `admins` SET `nom`='$nom',`prenom`='$prenom',`dateNaissance`='$date',`ville`='$ville',`password`='$password'
-    WHERE `id` = '$id'";
-    mysqli_query($connection,$sql);
-    $_SESSION['message'] = "information user has been update successfully";
-    header("Location: profil.php");
+        if($password == $_POST['upRepeatPassword']){
+            $sql ="UPDATE `admins` SET `nom`='$nom',`prenom`='$prenom',`dateNaissance`='$date',`ville`='$ville',`password`='$password'
+            WHERE `id` = '$id'";
+            mysqli_query($connection,$sql);
+            $_SESSION['message'] = "information user has been update successfully";
+            header("Location: profil.php");
+        }else{
+            $_SESSION['erreur'] = "Repeat Password";
+            header("Location: profil.php");
+        }
     }else{
         $img="SELECT image from admins where id = '$id'";
         $sul=mysqli_query($connection,$img);
@@ -164,7 +178,7 @@ function Counts(){
 function TotalPrix(){
     global $connection;
     $id = $_SESSION['id'];
-    $sql="SELECT sum(prix) FROM instruments where id_admin='$id'";
+    $sql="SELECT sum(prix*quantite) FROM instruments where id_admin='$id'";
     $res = mysqli_query($connection,$sql);
     $nbr= mysqli_fetch_array($res);
     echo $nbr[0];
@@ -295,7 +309,7 @@ function EditInstruments(){
     $prix = Validation($_POST['prix']);
     $types = $_POST['types'];
     if(empty($image)){
-        $sql="UPDATE `instruments` SET `title`='$title',`id_type`='$types' WHERE id=$id";
+        $sql="UPDATE `instruments` SET `title`='$title',`quantite`='$quantite',`prix`='$prix',`id_type`='$types' WHERE id=$id";
         mysqli_query($connection,$sql);
         $_SESSION['message'] = "Instrument has been update successfully";
         header("Location: instruments.php");

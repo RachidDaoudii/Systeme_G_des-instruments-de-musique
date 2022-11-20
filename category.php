@@ -12,36 +12,35 @@
     <!--Main layout-->
     <main>
         <div class="container pt-4">
-            <section class="d-flex justify-content-end">
-                    <button id="btnAddInstruments" class="btn btn-primary" onclick="" type="button" data-mdb-toggle="modal" data-mdb-target="#exampleModal"><i class="fas fa-cart-plus"></i></button>
-                </div>
-                <div class="d-flex justify-content-center">
-                    <?php if(isset($_SESSION['message'])):  ?>
-                        <div class="alert alert-success alert-dismissible fade show w-50">
-                            <strong>successfully!</strong>
-                            <?php 
-                                echo $_SESSION['message']; 
-                                unset($_SESSION['message']);
-                            ?>
-                            <button type="button" class="btn-close" data-mdb-dismiss="alert"></span>
-                        </div>
-                    <?php endif ?>
-                </div>
-                    <div class="table-responsive col-lg-12">
-                        <table class="table align-middle mb-0 bg-white">
-                            <thead class="bg-light">
-                                <tr>
-                                    <th>#</th>
-                                    <th>Title</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php categoty()?>
-                            </tbody>
-                        </table>
+            <div class="d-flex justify-content-end mb-5">
+                <button id="btnAddInstruments" class="btn btn-primary" onclick="" type="button" data-mdb-toggle="modal" data-mdb-target="#exampleModal"><i class="fas fa-cart-plus"></i></button>
+            </div>
+            <div class="d-flex justify-content-center">
+                <?php if(isset($_SESSION['message'])):  ?>
+                    <div class="alert alert-success alert-dismissible fade show w-50">
+                        <strong>successfully!</strong>
+                        <?php 
+                            echo $_SESSION['message']; 
+                            unset($_SESSION['message']);
+                        ?>
+                        <button type="button" class="btn-close" data-mdb-dismiss="alert"></span>
                     </div>
-            </section>
+                <?php endif ?>
+            </div>
+            <div class="table-responsive col-lg-12">
+                <table class="table align-middle mb-0 bg-white">
+                    <thead class="bg-primary text-light">
+                        <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php categoty()?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </main>
     <!--Main layout-->
