@@ -10,7 +10,7 @@
 	}
 ?>
     <!--Main layout-->
-    <main style="margin-top: 58px">
+    <main>
         <div class="container pt-4">
             <!-- session erreur -->
             <?php if(isset($_SESSION['erreur'])):  ?>
@@ -20,7 +20,7 @@
                             echo $_SESSION['erreur']; 
                             unset($_SESSION['erreur']);
                         ?>
-                        <button type="button" class="btn-close" data-mdb-dismiss="alert"></span>
+                        <button type="button" class="btn-close" data-mdb-dismiss="alert"></button>
                     </div>
                 <?php endif ?>
             <!-- session -->
@@ -32,7 +32,7 @@
                             echo $_SESSION['message']; 
                             unset($_SESSION['message']);
                         ?>
-                        <button type="button" class="btn-close" data-mdb-dismiss="alert"></span>
+                        <button type="button" class="btn-close" data-mdb-dismiss="alert"></button>
                     </div>
                 <?php endif ?>
             </div>
@@ -42,7 +42,7 @@
             ?>
             <form action="scripts.php" method="POST" enctype="multipart/form-data" class="row g-3 auto pt-3 needs-validation" novalidate>
                 <div class="d-flex justify-content-center  mb-4">
-                    <a href="#"><img class="rounded-circle" src="./assets/user/<?php echo $user['image']?>" alt=""  height="200"></a>
+                    <a href="#"><img class="rounded-circle imgProfil" src="./assets/user/<?php echo $user['image']?>" alt="" ></a>
                 </div>
                 <div class="d-flex justify-content-center">
                 <div class="form-outline mb-4">

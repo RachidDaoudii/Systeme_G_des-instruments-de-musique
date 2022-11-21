@@ -21,7 +21,7 @@
                     <div class="card-body">
                     <div class="d-flex justify-content-between px-md-1">
                         <div class="align-self-center">
-                        <i class="fas fa-chart-line text-success fa-3x"></i>
+                        <i class="fas fa-guitar text-success fa-3x"></i>
                         </div>
                         <div class="text-end">
                         <h3 class="text-white"><?php CountsInstruments();?></h3>
@@ -36,11 +36,11 @@
                     <div class="card-body">
                     <div class="d-flex justify-content-between px-md-1">
                         <div class="align-self-center">
-                        <i class="fas fa-map-marker-alt text-danger fa-3x"></i>
+                        <i class="fas fa-music text-danger fa-3x"></i>
                         </div>
                         <div class="text-end">
                         <h3 class="text-white"><?php nbrTypes()?></h3>
-                        <p class="mb-0 text-white">Total Types</p>
+                        <p class="mb-0 text-white">Total Category</p>
                         </div>
                     </div>
                     </div>
@@ -70,7 +70,7 @@
                         <p class="mb-0 text-white">Total Prix</p>
                         </div>
                         <div class="align-self-center">
-                        <i class="fas fa-chart-pie text-warning fa-3x"></i>
+                        <i class="fas fa-money-check-alt text-warning fa-3x"></i>
                         </div>
                     </div>
                     </div>

@@ -59,11 +59,26 @@ main {
   margin-top: 58px;
 }
 
-
 .logo{
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 #msgsql{
   font-size: x-small;
+}
+
+.imgInst{
+  width: 50px;
+}
+
+.imgProfil{
+  height:200px;
+}
+
+.imgUser{
+  width: 150px;
+}
+
+.imgNavbar{
+  width: 30px;
 }

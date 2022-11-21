@@ -1,6 +1,6 @@
 <?php 
     //INCLUDE DATABASE FILE
-    include('database.php'); 
+    include('database.php');
 
     //start session
     session_start();
@@ -14,7 +14,6 @@
     if(isset($_POST['edit']))              EditInstruments();
     if(isset($_POST['savecategoty']))      AddCategoty();
     if(isset($_GET['idcategory']))         deleteCategoty();
-
 
     //function validation input 
 function Validation($input){
@@ -48,6 +47,10 @@ function Signup(){
                 $_SESSION['image'] = $row['image'];
                 $_SESSION['online'] = 'on';
                 header("Location: index.php");
+            }
+            else{
+                $_SESSION['erreur'] = "email and password does not exist in the database";
+                header("Location: login.php");
             }
         }else{
             $_SESSION['erreur'] = "user does not exist in the database";
@@ -101,23 +104,22 @@ function users(){
         <div class="col-xl-3 col-sm-6 col-12 mb-4">
             <div class="card text-center">
                 <div class="card-header"><?php echo $element['nom']." ".$element['prenom']; ?></div>
-                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                    <img src="./assets/user/<?php echo $element['image']; ?>" style="width: 150px;" class="rounded-circle">
+                <div class="user-image">
+                    <img src="./assets/user/<?php echo $element['image']; ?>" class="rounded-circle imgUser">
                 </div>
                 <div class="card-body">
-                    <p class="card-text"><?php echo $element['email']; ?></p>
-                    <p class="card-text"><i class="fas fa-map-pin text-danger"></i><?php echo $element['ville']; ?></p>
+                    <p class="text-center"><?php echo $element['email']; ?></p>
+                    <p class="card-center"><i class="fas fa-map-pin text-danger"></i><?php echo $element['ville']; ?></p>
                 </div>
                 <?php
                 if($element['id'] == $_SESSION['id']){?>
-                    <div class="card-footer text-muted"><i class="fas fa-laptop text-success"></i>Connected</div>
+                    <div class="card-footer text-center"><i class="fas fa-laptop text-success"></i>Connected</div>
                 <?php
                 }else{?>
-                    <div class="card-footer text-muted"><i class="fas fa-laptop text-danger"></i>Connected</div>
+                    <div class="card-footer text-center"><i class="fas fa-laptop text-danger"></i>Connected</div>
                 <?php
                 }
                 ?>
-                
             </div>
         </div>
         <?php
@@ -145,24 +147,28 @@ function profil(){
             header("Location: profil.php");
         }
     }else{
-        $img="SELECT image from admins where id = '$id'";
-        $sul=mysqli_query($connection,$img);
-        $resul=mysqli_fetch_assoc($sul);
-        $image=$resul['image'];
-        $path="./assets/user/".$image;
-        unlink($path);
+        if($password == $_POST['upRepeatPassword']){
+            $img="SELECT image from admins where id = '$id'";
+            $sul=mysqli_query($connection,$img);
+            $resul=mysqli_fetch_assoc($sul);
+            $image=$resul['image'];
+            $path="./assets/user/".$image;
+            unlink($path);
+            
+            $image = uniqid($_FILES["upImg"]["name"]);
+            $tempname = $_FILES["upImg"]["tmp_name"];
+            $folder = "./assets/user/" . $image;
+
+            move_uploaded_file($tempname, $folder);
+            $sql="UPDATE `admins` SET `image`='$image',`nom`='$nom',`prenom`='$prenom',`dateNaissance`='$date',`ville`='$ville',`password`='$password' WHERE id=$id";
+            mysqli_query($connection,$sql);
+            $_SESSION['message'] = "image user has been update successfully";        
+            header("Location: profil.php");
+        }else{
+            $_SESSION['erreur'] = "Repeat Password";
+            header("Location: profil.php");
+        }
         
-        $image = uniqid($_FILES["upImg"]["name"]);
-        $tempname = $_FILES["upImg"]["tmp_name"];
-        $folder = "./assets/user/" . $image;
-
-        move_uploaded_file($tempname, $folder);
-
-        $sql="UPDATE `admins` SET `image`='$image' WHERE id=$id";
-        mysqli_query($connection,$sql);
-        $_SESSION['message'] = "image user has been update successfully";        
-        header("Location: profil.php");
-
     }
 }
     //function return count nombre de user
@@ -178,7 +184,7 @@ function Counts(){
 function TotalPrix(){
     global $connection;
     $id = $_SESSION['id'];
-    $sql="SELECT sum(prix*quantite) FROM instruments where id_admin='$id'";
+    $sql="SELECT ROUND(sum(prix*quantite),1) FROM instruments where id_admin='$id'";
     $res = mysqli_query($connection,$sql);
     $nbr= mysqli_fetch_array($res);
     echo $nbr[0];
@@ -241,7 +247,7 @@ function DisplayInstruments(){
     global $connection;
     $nbr=1;
     $id = $_SESSION['id'];
-    $sql ="SELECT ins.* ,ty.title as nameType ,ty.id as idType  FROM instruments as ins INNER JOIN types as ty ON ins.id_type = ty.id where ins.id_admin = '$id'";
+    $sql ="SELECT ins.* ,ty.title as nameType ,ty.id as idType  FROM instruments as ins INNER JOIN types as ty ON ins.id_type = ty.id where ins.id_admin = '$id' Order by ins.id asc";
     $res = mysqli_query($connection,$sql);
     while($element = mysqli_fetch_assoc($res)){?>
         <tr id="<?php echo $element['id'];?>">
@@ -250,8 +256,7 @@ function DisplayInstruments(){
             </td>
             <td>
                 <div class="d-flex align-items-center">
-                    <img src="./assets/img/<?php echo $element['image']; ?>" style="width: 45px; height: 45px" class="rounded-circle">
-                    <!-- <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt="" style="width: 45px; height: 45px" class="rounded-circle"/> -->
+                    <img class="imgInst" src="./assets/img/<?php echo $element['image']; ?>" class="rounded-circle">
                 </div>
             </td>
             <td>
@@ -279,23 +284,27 @@ function DisplayInstruments(){
 
     //function supprimer instrument
 function DeleteInstruments(){
-    global $connection;
-    $id = $_GET['id'];
-    $img="SELECT image from instruments where id = $id";
-    $sul=mysqli_query($connection,$img);
-    $resul=mysqli_fetch_assoc($sul);
-    $image=$resul['image'];
-    $path="./assets/img/".$image;
-    if(unlink($path)){
-        //select path+unlink 
-        $sql="DELETE FROM `instruments` WHERE id=$id";
-        mysqli_query($connection,$sql);
-        $_SESSION['message'] = "Instrument has been delete successfully";
-        header("Location: instruments.php");
-        
-    }else{
-        $_SESSION['error'] = "Instrument not update !!!";
-        header("Location: instruments.php");
+    if(!isset($_SESSION["user_name"]) || !isset($_SESSION['id'])){
+		header("location: login.php");
+		exit;
+	}else{
+        global $connection;
+        $id = $_GET['id'];
+        $img="SELECT image from instruments where id = $id";
+        $sul=mysqli_query($connection,$img);
+        $resul=mysqli_fetch_assoc($sul);
+        $image=$resul['image'];
+        $path="./assets/img/".$image;
+        if(unlink($path)){
+            //select path+unlink 
+            $sql="DELETE FROM `instruments` WHERE id=$id";
+            mysqli_query($connection,$sql);
+            $_SESSION['message'] = "Instrument has been delete successfully";
+            header("Location: instruments.php");
+        }else{
+            $_SESSION['error'] = "Instrument not update !!!";
+            header("Location: instruments.php");
+        }
     }
 }
 
@@ -352,7 +361,7 @@ function categoty(){
     while($element= mysqli_fetch_assoc($res)){?>
         <tr>
             <td>
-            <?php echo $nbr;?>
+                <?php echo $nbr;?>
             </td>
             <td>
                 <p class="fw-normal mb-1"><?php echo $element['title']?></p>
@@ -378,16 +387,19 @@ function  AddCategoty(){
 
     //function supprimer category
 function  deleteCategoty(){
-    global $connection;
-    $id=$_GET['idcategory'];
-    $sql="DELETE FROM `types` WHERE id='$id'";
-    mysqli_query($connection,$sql);
-    $_SESSION['message'] = " Delete Category has been successfully";
-    header("Location: category.php");
+    if(!isset($_SESSION["user_name"]) || !isset($_SESSION['id'])){
+		header("location: login.php");
+		exit;
+	}
+    else{
+        global $connection;
+        $id=$_GET['idcategory'];
+        $sql="DELETE FROM `types` WHERE id='$id'";
+        mysqli_query($connection,$sql);
+        $_SESSION['message'] = " Delete Category has been successfully";
+        header("Location: category.php");
+    }
 }
-
-
-
 
 
 

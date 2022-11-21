@@ -89,21 +89,6 @@ function returnInfo(id){
 }
 
 
-// const btn =document.querySelector(".on")
 
-
-// connect = navigator.onLine;
-// function onLine(){
-//   btn.style.color = "green";
-// }
-// function offLine(){
-//   btn.style.color = "red";
-// }
-
-// if (connect) onLine();
-// else offLine();
-
-// window.addEventListener("online",onLine);
-// window.addEventListener("offline",offLine);
 
 

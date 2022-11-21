@@ -1,5 +1,5 @@
 <?=
-$_GET['code'];
+$_GET['scope'];
 
 
 ?>

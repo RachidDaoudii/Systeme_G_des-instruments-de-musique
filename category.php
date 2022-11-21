@@ -23,7 +23,7 @@
                             echo $_SESSION['message']; 
                             unset($_SESSION['message']);
                         ?>
-                        <button type="button" class="btn-close" data-mdb-dismiss="alert"></span>
+                        <button type="button" class="btn-close" data-mdb-dismiss="alert"></button>
                     </div>
                 <?php endif ?>
             </div>
@@ -48,22 +48,22 @@
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="TitleModal">Add Category</h5>
-                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="scripts.php" method="POST" enctype="multipart/form-data" data-parsley-validate>
-                    <div class="mb-4">
-                        <label for="title" class="form-label">Title</label>
-                        <input type="text" class="form-control" name="titleCategory" id="titlemodel" required />
-                    </div>
-                    <div class="modal-footer">
-                        <div class="btn btn-secondary" data-mdb-dismiss="modal">Close</div>
-                        <button type="submit" class="btn btn-primary" name="savecategoty">Save</button>
-                    </div>
-                </form>
-            </div>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="TitleModal">Add Category</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="scripts.php" method="POST" enctype="multipart/form-data" data-parsley-validate>
+                        <div class="mb-4">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" class="form-control" name="titleCategory" id="titlemodel" required />
+                        </div>
+                        <div class="modal-footer">
+                            <div class="btn btn-secondary" data-mdb-dismiss="modal">Close</div>
+                            <button type="submit" class="btn btn-primary" name="savecategoty">Save</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
