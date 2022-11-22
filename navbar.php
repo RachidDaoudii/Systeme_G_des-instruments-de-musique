@@ -1,6 +1,5 @@
 <?php 
     if(!isset($_SESSION["user_name"]) || !isset($_SESSION['id'])){
-        session_start();
 		header("location: login.php");
 		exit;
 	}

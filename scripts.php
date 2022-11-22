@@ -1,9 +1,10 @@
 <?php 
+    //start session
+    session_start();
+    
     //INCLUDE DATABASE FILE
     include('database.php');
 
-    //start session
-    session_start();
 
     //routing
     if(isset($_POST['signup']))            Signup();
