@@ -5,7 +5,6 @@
     //INCLUDE DATABASE FILE
     include('database.php');
 
-
     //routing
     if(isset($_POST['signup']))            Signup();
     if(isset($_POST['register']))          register();
@@ -24,8 +23,8 @@ function Validation($input){
     $input = stripcslashes($input);
     //Convertit les balise html en string
     $input = htmlspecialchars($input);
-    //Supprime les espaces center 
-    $input = preg_replace('/\s+/','', $input);
+    //Supprime les espaces center
+    $input = preg_replace('/\s+/',' ', $input);
     return $input;
 }
 

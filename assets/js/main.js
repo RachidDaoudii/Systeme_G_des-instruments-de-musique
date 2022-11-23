@@ -3,7 +3,7 @@
 //   console.log('lkhglkdf')
 // })
 
-
+//check email déja 
 $(document).ready(function(){
   $("#registerEmail").keyup(function(){
     var email = $(this).val();
@@ -24,6 +24,8 @@ $(document).ready(function(){
   });
 });
 
+
+//en click rest form et caché button modifier et afficher button ajouter
 function ButtonAdd(){
   document.getElementById('form').reset();
   document.querySelector('#TitleModal').innerHTML="Add Instruments";
@@ -31,6 +33,7 @@ function ButtonAdd(){
   document.querySelector('#saveInstrument').style.display="block";
 }
 
+//en click caché button ajoter et afficher button modifier
 function ButtonUpdate(){
   document.querySelector('#TitleModal').innerHTML="Update Instruments";
   document.querySelector('#saveInstrument').style.display="none";
@@ -38,22 +41,6 @@ function ButtonUpdate(){
 
 }
 
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-// (() => {
-//     'use strict';
-//     // Fetch all the forms we want to apply custom Bootstrap validation styles to
-//     const forms = document.querySelectorAll('.needs-validation');
-//     // Loop over them and prevent submission
-//     Array.prototype.slice.call(forms).forEach((form) => {
-//       form.addEventListener('submit', (event) => {
-//         if (!form.checkValidity()) {
-//           event.preventDefault();
-//           event.stopPropagation();
-//         }
-//         form.classList.add('was-validated');
-//       }, false);
-//     });
-// })();
 
 function returnInfo(id){
   let nameImg=document.getElementById(id).children[0].getAttribute('img')
